@@ -1,0 +1,49 @@
+@import "./static/fonts/bubble-bobble-font/BubbleFont.css";
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+
+  .root {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: rgb(4,97,201);
+    background: linear-gradient(0deg, rgba(4,97,201,0.8939950980392157) 0%, rgba(14,175,247,0.7063200280112045) 35%, rgba(0,185,255,0.5326505602240896) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+}
+
+.playground {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+}
+
+.bubble-wrap {
+  position: absolute;
+  box-sizing: content-box;
+  transform: translate(-50%, -50%);
+}
+
+.gun {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  box-sizing: content-box;
+}
+
+.tank-wrap {
+  box-sizing: content-box;
+  position: absolute;
+  transition: left .05s linear, top .05s linear;
+}
+
+.bullet-wrap {
+  position: absolute;
+  transition: all .05s linear;
+}
