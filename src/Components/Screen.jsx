@@ -1,20 +1,38 @@
-import React, {useEffect} from 'react';
-import BaseBubble from './Base/Bubbles/BaseBubble';
+import React, {useState, useEffect} from 'react';
 import FirstTank from './Base/Tanks/FirstTank';
 import Store from './Store';
+import Playground from "./Playground";
 import BulletsPlace from "./BulletsPlace";
 
 
 function Screen() {
-    const playground = React.createRef();
+    Store.screen = React.createRef();
+    const [position, setPosition] = useState('');
+
+    const content = [];
+
+    for (let i in Store.matrix) {
+        let x = i.split('-');
+        let y = x[1];
+        x = x[0];
+        content.push(<Playground key={i} x={x} y={y} obj={Store.matrix[i]}/>)
+    }
 
     useEffect(() => {
-        Store.playgound = playground.current;
-    });
+        Store.screenUpdate = changeLevel;
+    }, []);
+
+    const changeLevel = () => {
+        setPosition(Store.getId('screen', '1'));
+    };
+
+    console.log('render');
 
     return (
-        <div id={'screen'} className={'screen'} ref={playground}>
+        <div id={'screen'} className={'screen'} ref={Store.screen} onClick={onclick}>
             <FirstTank/>
+            {content}
+            <BulletsPlace/>
         </div>
     );
 }

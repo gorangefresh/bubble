@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import StartButton from './StartButton';
-import Playground from './Playground';
 import './Menu.scss';
+import Screen from "./Screen";
 
 function Menu() {
     const [status = 'play', setStatus] = useState();
@@ -16,7 +16,7 @@ function Menu() {
         );
     } else if (status === 'play') {
         return (
-            <Playground/>
+            <Screen/>
         );
     }
 }

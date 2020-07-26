@@ -1,117 +1,156 @@
-import React, {useRef, useEffect} from 'react';
+import React from 'react';
 import MainBubble from '../Bubbles/MainBubble';
 import BaseGun from '../Guns/BaseGun';
 import Store from "../../Store";
+import HighOpacity from "../Gradients/OpacityGradients/HighOpacity";
 
 
-function FirstTank() {
-    const type = 'hero';
-    const tank = useRef();
-    const speed = 20;
-    const halfSpeed = 12;
-    let pressed = {};
-    const position = {x: document.body.offsetWidth / 2, y: document.body.offsetHeight / 2};
+class FirstTank extends React.Component {
+    type = 'hero';
+    speed = 20;
+    halfSpeed = 12;
+    pressed = {};
+    position = {x: document.body.offsetWidth / 2, y: document.body.offsetHeight / 2};
 
+    constructor(props) {
+        super(props);
 
-    const move = () => {
-        goUp();
-        goDown();
-        goLeft();
-        goRight();
-        tank.current.style.left = `${position.x}px`;
-        tank.current.style.top = `${position.y}px`;
-        Store.setMainTank(tank.current.getBoundingClientRect());
-        turn();
-        if (tank.current) setTimeout(move, 50);
-    };
+        this.tank = React.createRef();
+        this.travelBubble = React.createRef();
+    }
 
-    const goUp = () => {
-        if (pressed['KeyW'] && !pressed['KeyS']) {
-            if (pressed['KeyA'] || pressed['KeyD']) {
-                position.y = position.y - halfSpeed;
-            } else {
-                position.y = position.y - speed;
-            }
-        }
-    };
-    const goDown = () => {
-        if (pressed['KeyS'] && !pressed['KeyW']) {
-            if (pressed['KeyA'] || pressed['KeyD']) {
-                position.y = position.y + halfSpeed;
-            } else {
-                position.y = position.y + speed;
-            }
-        }
+    addKey = e => this.pressed[e.code] = true;
 
-    };
-    const goLeft = () => {
-        if (pressed['KeyA'] && !pressed['KeyD']) {
-            if (pressed['KeyS'] || pressed['KeyW']) {
-                position.x = position.x - halfSpeed;
-            } else {
-                position.x = position.x - speed;
-            }
-        }
+    removeKey = e => delete this.pressed[e.code];
 
-    };
-    const goRight = () => {
-        if (pressed['KeyD'] && !pressed['KeyA']) {
-            if (pressed['KeyS'] || pressed['KeyW']) {
-                position.x = position.x + halfSpeed;
-            } else {
-                position.x = position.x + speed;
-            }
-        }
-    };
+    componentDidMount() {
+        document.addEventListener('keyup', this.removeKey);
+        document.addEventListener('keydown', this.addKey);
+        document.addEventListener('mousemove', this.mouseMove);
+        this.move();
+    }
 
-    useEffect(() => {
-        move();
-        return () => tank.current = null;
-    });
+    componentWillUnmount() {
+        document.removeEventListener('keyup', this.removeKey);
+        document.removeEventListener('keydown', this.addKey);
+        document.removeEventListener('mousemove', this.mouseMove);
+        this.pressed = {};
+    }
 
-    const addKey = e => pressed[e.code] = true;
-
-    const removeKey = e => delete pressed[e.code];
-
-    useEffect(() => {
-        document.addEventListener('keyup', removeKey);
-        document.addEventListener('keydown', addKey);
-        return () => {
-            document.removeEventListener('keyup', removeKey);
-            document.removeEventListener('keydown', addKey);
+    travel = () => {
+        const continueMoving = () => {
+            this.tank.current.style.transition = '';
+            this.move();
         };
-    });
 
-    const mouseMove = e => {
-        Store.setMouse(e);
-        turn();
+        Store.travel = true;
+        this.travelBubble.current.style.display = 'flex';
+        let delta = Store.changeLevel();
+        this.tank.current.style.transition = 'left .7s linear, top .7s linear';
+        this.position.x += delta.x;
+        this.position.y += delta.y;
+
+        this.tank.current.style.left = `${this.position.x}px`;
+        this.tank.current.style.top = `${this.position.y}px`;
+        setTimeout(continueMoving, 600)
     };
 
-    const turn = () => {
-        let angle = getAngle(Store.mainTank, Store.mouse);
-        tank.current.style.transform = `rotate(${angle}deg)`;
-    };
-
-    const getAngle = (center, point) => {
-        return 180*Math.atan2(point.y-center.y, point.x-center.x)/Math.PI + 90;
-    };
-
-    useEffect(() => {
-        document.addEventListener('mousemove', mouseMove);
-        return () => {
-            document.removeEventListener('mousemove', mouseMove);
+    move = () => {
+        this.goUp();
+        this.goDown();
+        this.goLeft();
+        this.goRight();
+        if (this.tank.current) {
+            this.tank.current.style.left = `${this.position.x}px`;
+            this.tank.current.style.top = `${this.position.y}px`;
+            Store.setMainTank(this.tank.current.getBoundingClientRect());
+            this.turn();
         }
-    });
 
-    return (
-        <div className={'tank-wrap'} ref={tank}>
-            <MainBubble w={50}/>
-            <BaseGun parent={type} position={{left: '10px', top: '0px'}}/>
-            <BaseGun parent={type} position={{left: '-10px', top: '0px'}}/>
-            <BaseGun parent={type} position={{left: '-35px', top: '10px'}}/>
-            <BaseGun parent={type} position={{left: '35px', top: '10px'}}/>
-        </div>
-    );
+        if (Store.touchEdge(this.position.x, this.position.y)) {
+            if (!Store.travel) {
+                return this.travel();
+            }
+        } else {
+            if (Store.travel) {
+                Store.travel = false;
+                this.travelBubble.current.style.display = 'none';
+            }
+        }
+
+        if (this.tank.current) setTimeout(this.move, 50);
+    };
+
+    goUp = () => {
+        if (this.pressed['KeyW'] && !this.pressed['KeyS']) {
+            if (this.pressed['KeyA'] || this.pressed['KeyD']) {
+                this.position.y = this.position.y - this.halfSpeed;
+            } else {
+                this.position.y = this.position.y - this.speed;
+            }
+        }
+    };
+    goDown = () => {
+        if (this.pressed['KeyS'] && !this.pressed['KeyW']) {
+            if (this.pressed['KeyA'] || this.pressed['KeyD']) {
+                this.position.y = this.position.y + this.halfSpeed;
+            } else {
+                this.position.y = this.position.y + this.speed;
+            }
+        }
+
+    };
+    goLeft = () => {
+        if (this.pressed['KeyA'] && !this.pressed['KeyD']) {
+            if (this.pressed['KeyS'] || this.pressed['KeyW']) {
+                this.position.x = this.position.x - this.halfSpeed;
+            } else {
+                this.position.x = this.position.x - this.speed;
+            }
+        }
+
+    };
+    goRight = () => {
+        if (this.pressed['KeyD'] && !this.pressed['KeyA']) {
+            if (this.pressed['KeyS'] || this.pressed['KeyW']) {
+                this.position.x = this.position.x + this.halfSpeed;
+            } else {
+                this.position.x = this.position.x + this.speed;
+            }
+        }
+    };
+
+    mouseMove = e => {
+        Store.setMouse(e);
+        this.turn();
+    };
+
+    turn = () => {
+        const getAngle = (center, point) => {
+            return 180 * Math.atan2(point.y - center.y, point.x - center.x) / Math.PI + 90;
+        };
+
+        let angle = getAngle(Store.mainTank, Store.mouse);
+        if (this.tank.current) this.tank.current.style.transform = `rotate(${angle}deg)`;
+    };
+
+    render() {
+        return (
+            <div className={'tank-wrap'} ref={this.tank}>
+                <div className={'bubble-wrap'} style={{display: 'none'}} ref={this.travelBubble}>
+                    <svg id={'travel'} viewBox={'0 0 100 100'} style={{width: '100px', height: '100px'}}>
+                        <HighOpacity color={'#fafafa'} />
+                    </svg>
+                </div>
+                <MainBubble w={50}/>
+                <BaseGun parent={this.type} position={{left: '10px', top: '0px'}}/>
+                <BaseGun parent={this.type} position={{left: '-10px', top: '0px'}}/>
+                {/*<BaseGun parent={this.type} position={{left: '-35px', top: '10px'}}/>*/}
+                {/*<BaseGun parent={this.type} position={{left: '35px', top: '10px'}}/>*/}
+            </div>
+        );
+    }
+
 }
 
 export default FirstTank;

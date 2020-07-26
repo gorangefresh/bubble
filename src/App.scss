@@ -19,16 +19,32 @@ body {
 }
 
 .playground {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  transition: all .7s linear;
+}
+
+.screen {
   position: relative;
   width: 100%;
   height: 100%;
-  box-sizing: content-box;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .bubble-wrap {
   position: absolute;
   box-sizing: content-box;
   transform: translate(-50%, -50%);
+}
+
+.base-bubble-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
 
 .gun {
@@ -41,6 +57,7 @@ body {
   box-sizing: content-box;
   position: absolute;
   transition: left .05s linear, top .05s linear;
+  z-index: 10;
 }
 
 .bullet-wrap {

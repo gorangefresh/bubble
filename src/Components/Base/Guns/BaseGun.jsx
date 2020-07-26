@@ -5,16 +5,40 @@ import Store from "../../Store";
 
 
 function BaseGun(props) {
+    const fireRate = 200;
     const gun = useRef(null);
     const damage = 1;
-    let shooting = false;
+    let shooting = {mouseDown: false, fire: true};
 
     const startShooting = () => {
-        shooting = true;
-        shoot();
+        shooting.mouseDown = true;
+        if (shooting.fire) {
+            shoot();
+        }
     };
 
-    const stopShooting = () => shooting = false;
+    const shoot = () => {
+        shooting.fire = false;
+        if (shooting.mouseDown) {
+            let id = Store.getId('bullet', props.parent);
+            Store.bullets[id] = <Bullet
+                key={id} id={id}
+                coordinates={gun.current.getBoundingClientRect()}
+                tank={Store.mainTank}
+                damage={damage}
+            />;
+            Store.setBullet(id);
+
+            setTimeout(allowFire, fireRate);
+        }
+    };
+
+    const allowFire = () => {
+        shooting.fire = true;
+        if (shooting.mouseDown && gun.current) shoot();
+    };
+
+    const stopShooting = () => shooting.mouseDown = false;
 
     useEffect(() => {
         document.addEventListener('mousedown', startShooting);
@@ -23,25 +47,7 @@ function BaseGun(props) {
             document.removeEventListener('mousedown', startShooting);
             document.removeEventListener('mouseup', stopShooting);
         }
-    });
-
-    useEffect(() => {
-        return () => gun.current = null;
-    });
-
-    const shoot = () => {
-        if (shooting) {
-            let id = Store.getId('bullet', props.parent);
-            Store.bullets[id] = <Bullet
-                key={id} id={id}
-                coordinates={gun.current.getBoundingClientRect()}
-                damage={damage}
-            />;
-
-            Store.setBullet(id);
-        }
-        if (gun.current && shooting) setTimeout(shoot, 200);
-    };
+    }, []);
 
     return (
         <div className={'gun'} ref={gun} style={props.position}>

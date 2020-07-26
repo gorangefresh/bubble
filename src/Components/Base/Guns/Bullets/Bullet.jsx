@@ -5,7 +5,7 @@ import Store from "../../../Store";
 const type = 'bullet';
 
 function Bullet(props) {
-    const {id, coordinates, damage} = props;
+    const {id, coordinates, damage, tank} = props;
     const bullet = useRef();
     const position = coordinates;
     const baseSpeed = 30;
@@ -23,8 +23,8 @@ function Bullet(props) {
     });
 
     const getSpeed = () => {
-        let a = Store.mouse.x - position.x;
-        let b = Store.mouse.y - position.y;
+        let a = Store.mouse.x - tank.x;
+        let b = Store.mouse.y - tank.y;
         let R = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
         let t = R / baseSpeed;
         speed.x = a / t;
@@ -44,7 +44,7 @@ function Bullet(props) {
             Store.setBulletPosition(id, position);
         }
 
-        if (!touchEdge()) {
+        if (!Store.touchEdge(position.x, position.y) && !Store.travel) {
             setTimeout(move, 50);
         } else {
             letBurst(true);
@@ -52,18 +52,11 @@ function Bullet(props) {
 
     };
 
-    const touchEdge = () => {
-        let a = position.x - Store.currentBaseCords.x;
-        let b = position.y - Store.currentBaseCords.y;
-        let R = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-        return R >= Store.baseD / 2;
-    };
-
     let content;
     if (!burst) {
         content = <BulletBubble w={D}/>
     } else {
-        content = <div></div>
+        content = null;
     }
 
     return (<div className={'bullet-wrap'} ref={bullet}>
