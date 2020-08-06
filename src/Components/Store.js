@@ -1,4 +1,19 @@
-const levels = [{4: 4}, {3: 3}, {2: 2}, {1: 1}, {0: 0}];
+const levels = [
+    {4: 4},
+    {3: 3},
+    {2: 2},
+    {1: 1},
+    {
+        'level': 0,
+        enemies: {
+            1: {
+                type: 'firstEnemy',
+                hp: 3,
+                damage: 0,
+                bubbles: 2
+            }
+        }
+    }];
 
 class Store {
     tankD = 50;
@@ -118,7 +133,6 @@ class Store {
                     } else {
                         this.currentLevel.y = 0;
                     }
-                    console.log(this.currentLevel);
                     return {x: -this.baseD + radiusDelta(x), y: 0}
 
                 } else {
@@ -127,7 +141,6 @@ class Store {
                     } else {
                         this.currentLevel.y = (levels.length - 1) * 2;
                     }
-                    console.log(this.currentLevel);
                     return {x: this.baseD - radiusDelta(x), y: 0}
                 }
             } else {
@@ -137,7 +150,6 @@ class Store {
                     } else {
                         this.currentLevel.x = 0;
                     }
-                    console.log(this.currentLevel);
                     return {x: 0, y: -this.baseD + radiusDelta(y)}
                 } else {
                     if (this.currentLevel.x !== 0) {
@@ -145,7 +157,6 @@ class Store {
                     } else {
                         this.currentLevel.x = (levels.length - 1) * 2;
                     }
-                    console.log(this.currentLevel);
                     return {x: 0, y: this.baseD - radiusDelta(y)}
                 }
             }

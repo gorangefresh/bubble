@@ -33,7 +33,7 @@ function Bullet(props) {
 
     useEffect(() => {
         if (burst) delete Store.bullets[id];
-    }, [burst]);
+    }, [burst, id]);
 
     const move = () => {
         position.x += speed.x;

@@ -142,7 +142,7 @@ class FirstTank extends React.Component {
                         <HighOpacity color={'#fafafa'} />
                     </svg>
                 </div>
-                <MainBubble w={50}/>
+                <MainBubble w={50} color={'#234ecd'}/>
                 <BaseGun parent={this.type} position={{left: '10px', top: '0px'}}/>
                 <BaseGun parent={this.type} position={{left: '-10px', top: '0px'}}/>
                 {/*<BaseGun parent={this.type} position={{left: '-35px', top: '10px'}}/>*/}

@@ -17,16 +17,15 @@ function Screen() {
         x = x[0];
         content.push(<Playground key={i} x={x} y={y} obj={Store.matrix[i]}/>)
     }
-
-    useEffect(() => {
-        Store.screenUpdate = changeLevel;
-    }, []);
+    
 
     const changeLevel = () => {
         setPosition(Store.getId('screen', '1'));
     };
 
-    console.log('render');
+    useEffect(() => {
+        Store.screenUpdate = changeLevel;
+    }, []);
 
     return (
         <div id={'screen'} className={'screen'} ref={Store.screen} onClick={onclick}>

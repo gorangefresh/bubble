@@ -1,7 +1,6 @@
-import React, {useRef, useEffect} from 'react';
+import React from 'react';
 import HighOpacity from '../Gradients/OpacityGradients/HighOpacity';
 import './BaseBubble.scss';
-import Store from "../../Store";
 
 function BaseBubble(props) {
     const {w, h} = props;
