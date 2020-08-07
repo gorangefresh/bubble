@@ -3,12 +3,13 @@ import Store from './Store';
 import FirstEnemy from './Enemies/FirstEnemy';
 
 let enemy = {
-    'firstEnemy': FirstEnemy
+    'firstEnemy': FirstEnemy,
+    'secondEnemy': FirstEnemy,
 };
 
 function BulletsPlace() {
     const {x, y} = Store;
-    const [bullet, setBullet] = useState();
+    const [bullet, setBullet] = useState('');
 
     useEffect(() => {
         Store.setBullet = setBullet;
@@ -27,7 +28,7 @@ function BulletsPlace() {
             enemy[a[i].type],
             {
                 key: i,
-                hp: a[i].hp
+                enemyId: i
             }
         ))
     }

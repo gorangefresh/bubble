@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import FirstTank from './Base/Tanks/FirstTank';
 import Store from './Store';
 import Playground from "./Playground";
@@ -14,16 +14,13 @@ function Screen() {
         let x = i.split('-');
         let y = x[1];
         x = x[0];
+
         content.push(<Playground key={i} x={x} y={y} obj={Store.matrix[i]}/>)
     }
 
-    const changeLevel = () => {
-        setPosition(Store.getId('screen', '1'));
+    Store.screenUpdate = () => {
+        setPosition(Math.random());
     };
-
-    useEffect(() => {
-        Store.screenUpdate = changeLevel;
-    }, []);
 
     return (
         <div id={'screen'} className={'screen'} ref={Store.screen} onClick={onclick}>

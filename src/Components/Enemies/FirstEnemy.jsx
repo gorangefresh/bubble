@@ -15,6 +15,8 @@ class FirstEnemy extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {burst: false};
+
         this.tank = React.createRef();
         this.id = Store.getId(this.type);
         this.position = this.getRandomPosition();
@@ -25,8 +27,7 @@ class FirstEnemy extends React.Component {
         let R = Store.baseD / 2 - this.width;
         let x = Math.random() * R * (Math.random() > 0.5 ? 1 : -1);
         let y = Math.random() * Math.sqrt(R ** 2 - x ** 2) * (Math.random() > 0.5 ? 1 : -1);
-        console.log(this.props.hp)
-        Store.checkIn(this.type, this.id,{x, y, R: this.R}, 0, this.burst, this.props.hp);
+        Store.checkIn(this.type, this.props.enemyId, {x, y, R: this.R}, this.burst);
         return {x, y}
     }
 
@@ -39,8 +40,8 @@ class FirstEnemy extends React.Component {
     // }
 
     burst = () => {
-        console.log('burst');
-        Store.checkOut(this.type, this.id);
+        Store.checkOut(this.type, this.props.enemyId);
+        this.setState({burst: true});
     };
 
     move = () => {
@@ -111,13 +112,16 @@ class FirstEnemy extends React.Component {
     };
 
     render() {
-        let style = {left: `${this.position.x}px`, top: `${this.position.y}px`};
-
-        return (
-            <div className={'tank-wrap'} ref={this.tank} style={style}>
-                <MainBubble w={this.width} color={'#95f7ff'}/>
-            </div>
-        );
+        if (!this.state.burst) {
+            let style = {left: `${this.position.x}px`, top: `${this.position.y}px`};
+            return (
+                <div className={'tank-wrap'} ref={this.tank} style={style}>
+                    <MainBubble w={this.width} color={'#95f7ff'}/>
+                </div>
+            );
+        } else {
+            return null;
+        }
     }
 
 }

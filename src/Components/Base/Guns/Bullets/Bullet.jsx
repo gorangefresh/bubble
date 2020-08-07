@@ -2,7 +2,7 @@ import React, {useRef, useEffect, useState} from 'react';
 import BulletBubble from "../../Bubbles/BulletBubble";
 import Store from "../../../Store";
 
-const type = 'bullet';
+// const type = 'bullet';
 
 function Bullet(props) {
     const {id, coordinates, damage, tank} = props;

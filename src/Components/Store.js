@@ -2,7 +2,35 @@ const levels = [
     {4: 4},
     {3: 3},
     {2: 2},
-    {1: 1},
+    {
+        'level': 1,
+        enemy: {
+            1: {
+                type: 'secondEnemy',
+                hp: 5,
+                damage: 2,
+                xp: 3
+            },
+            2: {
+                type: 'secondEnemy',
+                hp: 5,
+                damage: 2,
+                xp: 3
+            },
+            3: {
+                type: 'secondEnemy',
+                hp: 5,
+                damage: 2,
+                xp: 3
+            },
+            4: {
+                type: 'secondEnemy',
+                hp: 5,
+                damage: 2,
+                xp: 3
+            }
+        }
+    },
     {
         'level': 0,
         enemy: {
@@ -10,12 +38,29 @@ const levels = [
                 type: 'firstEnemy',
                 hp: 3,
                 damage: 0,
-                bubbles: 2
+                xp: 2
+            },
+            2: {
+                type: 'firstEnemy',
+                hp: 3,
+                damage: 0,
+                xp: 2
+            },
+            3: {
+                type: 'firstEnemy',
+                hp: 3,
+                damage: 0,
+                xp: 2
             }
         }
-    }];
+    }
+];
+
+// const level = [];
 
 class Store {
+    matrixLength = (levels.length - 1) * 2;
+
     tankD = 50;
     baseD = 800;
 
@@ -23,9 +68,9 @@ class Store {
     screen;
 
     mouse = {x: 0, y: 0};
-    mainTank = {x: 0, y: 0};
+    mainTank = {x: 0, y: 0, xp: 0, level: 0};
     currentBasePosition = {x: 0, y: 0};
-    
+
     // Координаты текущего уровня
     y = 0;
     x = 0;
@@ -57,12 +102,17 @@ class Store {
         this.mainTank.y = position.y;
     };
 
-    checkIn = (type, id, coordinates, damage, burst, hp) => {
-        this[type][id] = {coordinates, damage, burst, hp}
+    checkIn = (type, id, coordinates, burst) => {
+        let level = `${this.x}-${this.y}`;
+        this.matrix[level][type][id].coordinates = coordinates;
+        this.matrix[level][type][id].burst = burst;
+
     };
 
     checkOut = (type, id) => {
-        delete this[type][id];
+        let level = `${this.x}-${this.y}`;
+        this.mainTank.xp += this.matrix[level][type][id].xp;
+        delete this.matrix[level][type][id];
     };
 
     getId = (type, parent) => {
@@ -70,12 +120,17 @@ class Store {
     };
 
     hit = (x, y, damage) => {
-        for (let i in this.enemy) {
-            let pos = this.enemy[i].coordinates;
-            // console.log(pos.x - pos.R < x, x < pos.x + pos.R, pos.y - pos.R < y, y < pos.y + pos.R);
+        let level = `${this.x}-${this.y}`;
+
+        for (let i in this.matrix[level].enemy) {
+            let pos = this.matrix[level].enemy[i].coordinates;
+
             if (pos.x - pos.R < x && x < pos.x + pos.R && pos.y - pos.R < y && y < pos.y + pos.R) {
-                this.enemy[i].hp = this.enemy[i].hp - damage;
-                if (this.enemy[i].hp <= 0) this.enemy[i].burst();
+
+                this.matrix[level].enemy[i].hp -= damage;
+                if (this.matrix[level].enemy[i].hp <= 0) {
+                    this.matrix[level].enemy[i].burst();
+                }
                 return true;
             }
         }
@@ -138,7 +193,7 @@ class Store {
 
             if (+Math.abs(x) > +Math.abs(y)) {
                 if (x > 0) {
-                    if (this.y !== (levels.length - 1) * 2) {
+                    if (this.y !== this.matrixLength) {
                         this.y = this.y + 1;
                     } else {
                         this.y = 0;
@@ -149,13 +204,13 @@ class Store {
                     if (this.y !== 0) {
                         this.y = this.y - 1;
                     } else {
-                        this.y = (levels.length - 1) * 2;
+                        this.y = this.matrixLength;
                     }
                     return {x: this.baseD - radiusDelta(x), y: 0}
                 }
             } else {
                 if (y > 0) {
-                    if (this.x !== (levels.length - 1) * 2) {
+                    if (this.x !== this.matrixLength) {
                         this.x = this.x + 1;
                     } else {
                         this.x = 0;
@@ -165,7 +220,7 @@ class Store {
                     if (this.x !== 0) {
                         this.x = this.x - 1;
                     } else {
-                        this.x = (levels.length - 1) * 2;
+                        this.x = this.matrixLength;
                     }
                     return {x: 0, y: this.baseD - radiusDelta(y)}
                 }

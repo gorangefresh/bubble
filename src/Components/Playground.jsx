@@ -77,7 +77,7 @@ class Playground extends React.Component {
     };
 
     render() {
-        const {x, y, obj} = this.props;
+        const {x, y} = this.props;
         this.getPosition(+x, +y);
 
         if (this.position) {
@@ -104,38 +104,3 @@ class Playground extends React.Component {
 }
 
 export default Playground;
-
-// function Playground(props) {
-//     const {x, y, obj} = props;
-//     const base = useRef(null);
-//
-//     const setCoordinates = () => {
-//         Store.changeBaseCords(base.current.getBoundingClientRect());
-//     };
-//
-//     useEffect(() => {
-//         if (props.current) {
-//             setCoordinates();
-//             window.addEventListener('resize', setCoordinates);
-//         }
-//         return () => window.removeEventListener('resize', setCoordinates);
-//     }, [x, y]);
-//
-//
-//
-//
-//     const styles = {
-//         width: `${Store.baseD}px`,
-//         height: `${Store.baseD}px`,
-//         left: `${left}%`,
-//         top: `${top}%`,
-//     };
-//
-//     return (
-//         <div id={'playground'} className={'playground'} ref={base} style={styles}>
-//             <BaseBubble w={Store.baseD}/>
-//         </div>
-//     );
-// }
-//
-// export default Playground;
