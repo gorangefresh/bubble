@@ -5,7 +5,7 @@ const levels = [
     {1: 1},
     {
         'level': 0,
-        enemies: {
+        enemy: {
             1: {
                 type: 'firstEnemy',
                 hp: 3,
@@ -24,12 +24,15 @@ class Store {
 
     mouse = {x: 0, y: 0};
     mainTank = {x: 0, y: 0};
-    currentBaseCords = {x: 0, y: 0};
-    currentLevel = {y: 0, x: 0};
+    currentBasePosition = {x: 0, y: 0};
+    
+    // Координаты текущего уровня
+    y = 0;
+    x = 0;
 
     tank = {};
+    enemy = {};
 
-    bullet = {};
     bullets = {};
     setBullet;
 
@@ -38,11 +41,11 @@ class Store {
     travel = false;
 
     changeBaseCords = (coordinates) => {
-        this.currentBaseCords = ({x: coordinates.x + this.baseD / 2, y: coordinates.y + this.baseD / 2});
+        this.currentBasePosition = ({x: coordinates.x + this.baseD / 2, y: coordinates.y + this.baseD / 2});
     };
 
-    changeTankCoordinates = (id, coordinates) => {
-        this.tank[id].coordinates = coordinates;
+    changeTankCoordinates = (id, coordinates, R) => {
+        this.tank[id] = {coordinates, R};
     };
 
     setMouse = e => {
@@ -54,8 +57,8 @@ class Store {
         this.mainTank.y = position.y;
     };
 
-    checkIn = (type, id, coordinates, damage) => {
-        this[type][id] = {coordinates, damage}
+    checkIn = (type, id, coordinates, damage, burst, hp) => {
+        this[type][id] = {coordinates, damage, burst, hp}
     };
 
     checkOut = (type, id) => {
@@ -66,8 +69,16 @@ class Store {
         return `${type}-${parent ? parent : ''}-${Date.now()}`;
     };
 
-    setBulletPosition = (id, position) => {
-        this.bullet[id].coordinates = position;
+    hit = (x, y, damage) => {
+        for (let i in this.enemy) {
+            let pos = this.enemy[i].coordinates;
+            // console.log(pos.x - pos.R < x, x < pos.x + pos.R, pos.y - pos.R < y, y < pos.y + pos.R);
+            if (pos.x - pos.R < x && x < pos.x + pos.R && pos.y - pos.R < y && y < pos.y + pos.R) {
+                this.enemy[i].hp = this.enemy[i].hp - damage;
+                if (this.enemy[i].hp <= 0) this.enemy[i].burst();
+                return true;
+            }
+        }
     };
 
     init = () => {
@@ -106,14 +117,13 @@ class Store {
         }
 
         this.matrix = m;
-        this.currentLevel = {x: +a - 1, y: +a - 1};
+        this.x = +a - 1;
+        this.y = +a - 1;
     };
 
     touchEdge = (x, y) => {
-        if (this.currentBaseCords.x === 0 && this.currentBaseCords.y === 0) return false;
-        let a = x - this.currentBaseCords.x;
-        let b = y - this.currentBaseCords.y;
-        let R = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+        if (this.currentBasePosition.x === 0 && this.currentBasePosition.y === 0) return false;
+        let R = Math.sqrt(x ** 2 + y ** 2);
         return R >= this.baseD / 2;
     };
 
@@ -123,39 +133,39 @@ class Store {
                 return ((this.baseD / 2 - Math.abs(d)) * 2 + this.tankD);
             };
 
-            let x = this.mainTank.x - this.currentBaseCords.x;
-            let y = this.mainTank.y - this.currentBaseCords.y;
+            let x = this.mainTank.x - this.currentBasePosition.x;
+            let y = this.mainTank.y - this.currentBasePosition.y;
 
             if (+Math.abs(x) > +Math.abs(y)) {
                 if (x > 0) {
-                    if (this.currentLevel.y !== (levels.length - 1) * 2) {
-                        this.currentLevel.y = this.currentLevel.y + 1;
+                    if (this.y !== (levels.length - 1) * 2) {
+                        this.y = this.y + 1;
                     } else {
-                        this.currentLevel.y = 0;
+                        this.y = 0;
                     }
                     return {x: -this.baseD + radiusDelta(x), y: 0}
 
                 } else {
-                    if (this.currentLevel.y !== 0) {
-                        this.currentLevel.y = this.currentLevel.y - 1;
+                    if (this.y !== 0) {
+                        this.y = this.y - 1;
                     } else {
-                        this.currentLevel.y = (levels.length - 1) * 2;
+                        this.y = (levels.length - 1) * 2;
                     }
                     return {x: this.baseD - radiusDelta(x), y: 0}
                 }
             } else {
                 if (y > 0) {
-                    if (this.currentLevel.x !== (levels.length - 1) * 2) {
-                        this.currentLevel.x = this.currentLevel.x + 1;
+                    if (this.x !== (levels.length - 1) * 2) {
+                        this.x = this.x + 1;
                     } else {
-                        this.currentLevel.x = 0;
+                        this.x = 0;
                     }
                     return {x: 0, y: -this.baseD + radiusDelta(y)}
                 } else {
-                    if (this.currentLevel.x !== 0) {
-                        this.currentLevel.x = this.currentLevel.x - 1;
+                    if (this.x !== 0) {
+                        this.x = this.x - 1;
                     } else {
-                        this.currentLevel.x = (levels.length - 1) * 2;
+                        this.x = (levels.length - 1) * 2;
                     }
                     return {x: 0, y: this.baseD - radiusDelta(y)}
                 }

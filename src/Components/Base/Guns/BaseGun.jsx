@@ -5,7 +5,7 @@ import Store from "../../Store";
 
 
 function BaseGun(props) {
-    const fireRate = 200;
+    const fireRate = 400;
     const gun = useRef(null);
     const damage = 1;
     let shooting = {mouseDown: false, fire: true};

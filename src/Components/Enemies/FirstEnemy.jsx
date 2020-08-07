@@ -7,21 +7,26 @@ class FirstEnemy extends React.Component {
     type = 'enemy';
     speed = 15;
     halfSpeed = this.speed * .66;
-    width = 20;
+    width = 40;
+    R = 20;
     pressed = {};
-    position = this.getRandomPosition();
+    position = {};
 
     constructor(props) {
         super(props);
 
         this.tank = React.createRef();
+        this.id = Store.getId(this.type);
+        this.position = this.getRandomPosition();
+
     }
 
     getRandomPosition() {
         let R = Store.baseD / 2 - this.width;
         let x = Math.random() * R * (Math.random() > 0.5 ? 1 : -1);
-        let y = Math.random() * Math.sqrt(R ** 2 - x ** 2) * (Math.random() > 0.5 ? 1 : -1) + document.body.offsetHeight / 2;
-        x += document.body.offsetWidth / 2;
+        let y = Math.random() * Math.sqrt(R ** 2 - x ** 2) * (Math.random() > 0.5 ? 1 : -1);
+        console.log(this.props.hp)
+        Store.checkIn(this.type, this.id,{x, y, R: this.R}, 0, this.burst, this.props.hp);
         return {x, y}
     }
 
@@ -33,6 +38,11 @@ class FirstEnemy extends React.Component {
     //     this.pressed = {};
     // }
 
+    burst = () => {
+        console.log('burst');
+        Store.checkOut(this.type, this.id);
+    };
+
     move = () => {
         this.goUp();
         this.goDown();
@@ -41,8 +51,8 @@ class FirstEnemy extends React.Component {
         if (this.tank.current) {
             this.tank.current.style.left = `${this.position.x}px`;
             this.tank.current.style.top = `${this.position.y}px`;
-            // Store.setMainTank(this.tank.current.getBoundingClientRect());
-            this.turn();
+            Store[this.type][this.id].coordinates = {x: this.position.x, y: this.position.y};
+            // this.turn();
         }
 
         if (Store.touchEdge(this.position.x, this.position.y)) {

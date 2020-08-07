@@ -7,25 +7,25 @@ const type = 'bullet';
 function Bullet(props) {
     const {id, coordinates, damage, tank} = props;
     const bullet = useRef();
-    const position = coordinates;
-    const baseSpeed = 30;
+    const position = {x: coordinates.x - Store.currentBasePosition.x, y: coordinates.y - Store.currentBasePosition.y};
+    const baseSpeed = 6;
     const D = 10;
     const [burst, letBurst] = useState(false);
     const speed = {x: 0, y: 0};
 
     useEffect(() => {
-        Store.checkIn(type, id, coordinates, damage);
+        // Store.checkIn(type, id, position, damage);
         getSpeed();
         move();
-        return () => {
-            Store.checkOut('bullet', id);
-        };
-    });
+        // return () => {
+        //     Store.checkOut('bullet', id);
+        // };
+    },[]);
 
     const getSpeed = () => {
         let a = Store.mouse.x - tank.x;
         let b = Store.mouse.y - tank.y;
-        let R = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+        let R = Math.sqrt(a**2 + b**2);
         let t = R / baseSpeed;
         speed.x = a / t;
         speed.y = b / t;
@@ -38,14 +38,17 @@ function Bullet(props) {
     const move = () => {
         position.x += speed.x;
         position.y += speed.y;
-        if (!burst) {
+        if (!burst && bullet.current) {
             bullet.current.style.left = `${position.x}px`;
             bullet.current.style.top = `${position.y}px`;
-            Store.setBulletPosition(id, position);
         }
 
-        if (!Store.touchEdge(position.x, position.y) && !Store.travel) {
-            setTimeout(move, 50);
+        if (
+            !Store.travel &&
+            !Store.touchEdge(position.x, position.y) &&
+            !Store.hit(position.x, position.y, damage)
+        ) {
+            setTimeout(move, 10);
         } else {
             letBurst(true);
         }
@@ -59,7 +62,7 @@ function Bullet(props) {
         content = null;
     }
 
-    return (<div className={'bullet-wrap'} ref={bullet}>
+    return (<div className={'bullet-wrap'} ref={bullet} style={{left: `${position.x}px`, top: `${position.y}px`}}>
         {content}
     </div>);
 

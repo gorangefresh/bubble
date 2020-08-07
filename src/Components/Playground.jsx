@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseBubble from './Base/Bubbles/BaseBubble';
 import Store from './Store';
+import BulletsPlace from "./BulletsPlace";
 
 class Playground extends React.Component {
     constructor(props) {
@@ -44,29 +45,29 @@ class Playground extends React.Component {
 
 
     getPosition = (x, y) => {
-        if (x === Store.currentLevel.x && y === Store.currentLevel.y) {
+        if (x === Store.x && y === Store.y) {
             this.top = '50%';
             this.left = '50%';
             return this.position = 'center';
         } else {
-            if (x === Store.currentLevel.x) {
+            if (x === Store.x) {
                 this.top = '50%';
-                if (y === Store.currentLevel.y - 1) {
+                if (y === Store.y - 1) {
                     this.left = '-150%';
                     return this.position = 'left';
                 }
-                if (y === Store.currentLevel.y + 1) {
+                if (y === Store.y + 1) {
                     this.left = '150%';
                     return this.position = 'right';
                 }
             }
-            if (y === Store.currentLevel.y) {
+            if (y === Store.y) {
                 this.left = '50%';
-                if (x === Store.currentLevel.x - 1) {
+                if (x === Store.x - 1) {
                     this.top = '-150%';
                     return this.position = 'top';
                 }
-                if (x === Store.currentLevel.x + 1) {
+                if (x === Store.x + 1) {
                     this.top = '150%';
                     return this.position = 'bottom';
                 }
@@ -79,23 +80,26 @@ class Playground extends React.Component {
         const {x, y, obj} = this.props;
         this.getPosition(+x, +y);
 
-        let styles = {
-            width: `${Store.baseD}px`,
-            height: `${Store.baseD}px`,
-            left: this.left,
-            top: this.top
-        };
-
         if (this.position) {
+            let styles = {
+                width: `${Store.baseD}px`,
+                height: `${Store.baseD}px`,
+                left: this.left,
+                top: this.top
+            };
+
+            let place;
+            if (this.position === 'center') place = <BulletsPlace/>;
+
             return (
                 <div id={'playground'} className={'playground'} ref={this.base} style={styles}>
                     <BaseBubble w={Store.baseD}/>
+                    {place}
                 </div>
             );
         } else {
             return null;
         }
-
     }
 }
 

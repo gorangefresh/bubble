@@ -7,7 +7,7 @@ let enemy = {
 };
 
 function BulletsPlace() {
-    const {x, y} = Store.currentLevel;
+    const {x, y} = Store;
     const [bullet, setBullet] = useState();
 
     useEffect(() => {
@@ -21,7 +21,7 @@ function BulletsPlace() {
     }
 
     let enemies = [];
-    let a = Store.matrix[x + '-' + y].enemies;
+    let a = Store.matrix[x + '-' + y].enemy;
     for (let i in a) {
         enemies.push(React.createElement(
             enemy[a[i].type],
@@ -33,7 +33,12 @@ function BulletsPlace() {
     }
 
     return (
-        <div style={{width: '100%', height: '100%', position: 'absolute'}}>
+        <div
+            id={'place'}
+            style={{
+                width: '100%', height: '100%', position: 'absolute',
+                left: '50%', top: '50%'
+            }}>
             {bullets}
             {enemies}
         </div>

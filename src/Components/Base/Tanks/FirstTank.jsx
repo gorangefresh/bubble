@@ -67,7 +67,7 @@ class FirstTank extends React.Component {
             this.turn();
         }
 
-        if (Store.touchEdge(this.position.x, this.position.y)) {
+        if (Store.touchEdge(this.position.x - Store.currentBasePosition.x, this.position.y - Store.currentBasePosition.y)) {
             if (!Store.travel) {
                 return this.travel();
             }
@@ -143,8 +143,8 @@ class FirstTank extends React.Component {
                     </svg>
                 </div>
                 <MainBubble w={50} color={'#234ecd'}/>
-                <BaseGun parent={this.type} position={{left: '10px', top: '0px'}}/>
-                <BaseGun parent={this.type} position={{left: '-10px', top: '0px'}}/>
+                <BaseGun parent={this.type} position={{left: '0px', top: '0px'}}/>
+                {/*<BaseGun parent={this.type} position={{left: '-10px', top: '0px'}}/>*/}
                 {/*<BaseGun parent={this.type} position={{left: '-35px', top: '10px'}}/>*/}
                 {/*<BaseGun parent={this.type} position={{left: '35px', top: '10px'}}/>*/}
             </div>
