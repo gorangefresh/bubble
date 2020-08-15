@@ -1,4 +1,10 @@
 const levels = [
+    {7: 7},
+    {6: 6},
+    {5: 5},
+    {7: 7},
+    {6: 6},
+    {5: 5},
     {4: 4},
     {3: 3},
     {2: 2},
@@ -9,25 +15,29 @@ const levels = [
                 type: 'secondEnemy',
                 hp: 5,
                 damage: 2,
-                xp: 3
+                xp: 3,
+                R: 20
             },
             2: {
                 type: 'secondEnemy',
                 hp: 5,
                 damage: 2,
-                xp: 3
+                xp: 3,
+                R: 20
             },
             3: {
                 type: 'secondEnemy',
                 hp: 5,
                 damage: 2,
-                xp: 3
+                xp: 3,
+                R: 20
             },
             4: {
                 type: 'secondEnemy',
                 hp: 5,
                 damage: 2,
-                xp: 3
+                xp: 3,
+                R: 20
             }
         }
     },
@@ -38,37 +48,41 @@ const levels = [
                 type: 'firstEnemy',
                 hp: 3,
                 damage: 0,
-                xp: 2
+                xp: 2,
+                R: 20
             },
             2: {
                 type: 'firstEnemy',
                 hp: 3,
                 damage: 0,
-                xp: 2
+                xp: 2,
+                R: 20
             },
             3: {
                 type: 'firstEnemy',
                 hp: 3,
                 damage: 0,
-                xp: 2
+                xp: 2,
+                R: 20
             }
         }
     }
 ];
 
-// const level = [];
+const lvl = {0: 0, 1: 20, 2: 60, 3: 200, 4: 500};
 
 class Store {
     matrixLength = (levels.length - 1) * 2;
 
     tankD = 50;
     baseD = 800;
+    baseR = this.baseD / 2;
 
     matrix;
     screen;
 
     mouse = {x: 0, y: 0};
-    mainTank = {x: 0, y: 0, xp: 0, level: 0};
+    mainTank = {x: 0, y: 0, exp: 0, lvl: 0};
     currentBasePosition = {x: 0, y: 0};
 
     // Координаты текущего уровня
@@ -85,8 +99,10 @@ class Store {
 
     travel = false;
 
+    setExp;
+
     changeBaseCords = (coordinates) => {
-        this.currentBasePosition = ({x: coordinates.x + this.baseD / 2, y: coordinates.y + this.baseD / 2});
+        this.currentBasePosition = ({x: coordinates.x + this.baseR, y: coordinates.y + this.baseR});
     };
 
     changeTankCoordinates = (id, coordinates, R) => {
@@ -103,16 +119,13 @@ class Store {
     };
 
     checkIn = (type, id, coordinates, burst) => {
-        let level = `${this.x}-${this.y}`;
-        this.matrix[level][type][id].coordinates = coordinates;
-        this.matrix[level][type][id].burst = burst;
+        this.current[type][id].coordinates = coordinates;
+        this.current[type][id].burst = burst;
 
     };
 
     checkOut = (type, id) => {
-        let level = `${this.x}-${this.y}`;
-        this.mainTank.xp += this.matrix[level][type][id].xp;
-        delete this.matrix[level][type][id];
+        delete this.matrix[`${this.x}-${this.y}`][type][id];
     };
 
     getId = (type, parent) => {
@@ -120,16 +133,15 @@ class Store {
     };
 
     hit = (x, y, damage) => {
-        let level = `${this.x}-${this.y}`;
+        for (let i in this.current.enemy) {
+            let pos = this.current.enemy[i].coordinates;
+            let R = this.current.enemy[i].R;
+            if (pos.x - R < x && x < pos.x + R && pos.y - R < y && y < pos.y + R) {
 
-        for (let i in this.matrix[level].enemy) {
-            let pos = this.matrix[level].enemy[i].coordinates;
-
-            if (pos.x - pos.R < x && x < pos.x + pos.R && pos.y - pos.R < y && y < pos.y + pos.R) {
-
-                this.matrix[level].enemy[i].hp -= damage;
-                if (this.matrix[level].enemy[i].hp <= 0) {
-                    this.matrix[level].enemy[i].burst();
+                this.current.enemy[i].hp -= damage;
+                if (this.current.enemy[i].hp <= 0) {
+                    this.addExp(this.current.enemy[i].xp);
+                    this.current.enemy[i].burst();
                 }
                 return true;
             }
@@ -174,23 +186,24 @@ class Store {
         this.matrix = m;
         this.x = +a - 1;
         this.y = +a - 1;
+        this.current = this.matrix[`${this.x}-${this.y}`];
     };
 
-    touchEdge = (x, y) => {
+    touchEdge = (x, y, r = 0) => {
         if (this.currentBasePosition.x === 0 && this.currentBasePosition.y === 0) return false;
         let R = Math.sqrt(x ** 2 + y ** 2);
-        return R >= this.baseD / 2;
+        return R + r >= this.baseR;
     };
 
     changeLevel = () => {
         const getDirections = () => {
             const radiusDelta = (d) => {
-                return ((this.baseD / 2 - Math.abs(d)) * 2 + this.tankD);
+                return ((this.baseR - Math.abs(d)) * 2 + this.tankD);
             };
 
             let x = this.mainTank.x - this.currentBasePosition.x;
             let y = this.mainTank.y - this.currentBasePosition.y;
-
+            let a;
             if (+Math.abs(x) > +Math.abs(y)) {
                 if (x > 0) {
                     if (this.y !== this.matrixLength) {
@@ -198,15 +211,14 @@ class Store {
                     } else {
                         this.y = 0;
                     }
-                    return {x: -this.baseD + radiusDelta(x), y: 0}
-
+                    a = {x: -this.baseD + radiusDelta(x), y: 0};
                 } else {
                     if (this.y !== 0) {
                         this.y = this.y - 1;
                     } else {
                         this.y = this.matrixLength;
                     }
-                    return {x: this.baseD - radiusDelta(x), y: 0}
+                    a = {x: this.baseD - radiusDelta(x), y: 0}
                 }
             } else {
                 if (y > 0) {
@@ -215,23 +227,46 @@ class Store {
                     } else {
                         this.x = 0;
                     }
-                    return {x: 0, y: -this.baseD + radiusDelta(y)}
+                    a = {x: 0, y: -this.baseD + radiusDelta(y)}
                 } else {
                     if (this.x !== 0) {
                         this.x = this.x - 1;
                     } else {
                         this.x = this.matrixLength;
                     }
-                    return {x: 0, y: this.baseD - radiusDelta(y)}
+                    a = {x: 0, y: this.baseD - radiusDelta(y)}
                 }
             }
+            this.current = this.matrix[`${this.x}-${this.y}`];
+            return a;
         };
+
         let delta = getDirections();
         this.screenUpdate();
         return delta;
     };
 
+    addExp = (exp) => {
+        this.mainTank.exp += exp;
+        for (let i in lvl) {
 
+            if (this.mainTank.exp < lvl[i] ) {
+                this.mainTank.lvl = +i - 1;
+                if (i > 0) {
+
+                    if (lvl[+i+1]) {
+                        exp = (this.mainTank.exp - lvl[this.mainTank.lvl]) / lvl[i] * 100;
+                    } else {
+                        exp = 100;
+                    }
+                } else {
+                    exp = this.mainTank.exp / lvl[i] * 100;
+                }
+                this.setExp(exp);
+                break
+            }
+        }
+    };
 }
 
 export default new Store();

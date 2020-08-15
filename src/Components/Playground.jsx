@@ -52,22 +52,34 @@ class Playground extends React.Component {
         } else {
             if (x === Store.x) {
                 this.top = '50%';
-                if (y === Store.y - 1) {
+                if (
+                    y === Store.y - 1 ||
+                    (Store.y === 0 && y === Store.matrixLength)
+                ) {
                     this.left = '-150%';
                     return this.position = 'left';
                 }
-                if (y === Store.y + 1) {
+                if (
+                    y === Store.y + 1 ||
+                    (y === 0 && Store.y === Store.matrixLength)
+                ) {
                     this.left = '150%';
                     return this.position = 'right';
                 }
             }
             if (y === Store.y) {
                 this.left = '50%';
-                if (x === Store.x - 1) {
+                if (
+                    x === Store.x - 1 ||
+                    (Store.x === 0 && x === Store.matrixLength)
+                ) {
                     this.top = '-150%';
                     return this.position = 'top';
                 }
-                if (x === Store.x + 1) {
+                if (
+                    x === Store.x + 1 ||
+                    (x === 0 && Store.x === Store.matrixLength)
+                ) {
                     this.top = '150%';
                     return this.position = 'bottom';
                 }
@@ -92,8 +104,8 @@ class Playground extends React.Component {
             if (this.position === 'center') place = <BulletsPlace/>;
 
             return (
-                <div id={'playground'} className={'playground'} ref={this.base} style={styles}>
-                    <BaseBubble w={Store.baseD}/>
+                <div id={x + '-' + y} className={'playground'} ref={this.base} style={styles}>
+                    <BaseBubble color={'#FFFFFF'} w={Store.baseD}/>
                     {place}
                 </div>
             );
