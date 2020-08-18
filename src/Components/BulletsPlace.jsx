@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Store from './Store';
 import FirstEnemy from './Enemies/FirstEnemy';
+import SecondEnemy from './Enemies/SecondEnemy';
 
 let enemy = {
     'firstEnemy': FirstEnemy,
-    'secondEnemy': FirstEnemy,
+    'secondEnemy': SecondEnemy,
 };
 
 function BulletsPlace() {

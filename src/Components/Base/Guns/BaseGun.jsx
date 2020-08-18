@@ -22,11 +22,13 @@ function BaseGun(props) {
         if (shooting.mouseDown) {
             let id = Store.getId('bullet', props.parent);
             Store.bullets[id] = <Bullet
+                parent={props.parent}
                 key={id}
                 id={id}
                 coordinates={gun.current.getBoundingClientRect()}
                 tank={Store.mainTank}
                 damage={damage}
+                target={Store.mouse}
             />;
             Store.setBullet(id);
 

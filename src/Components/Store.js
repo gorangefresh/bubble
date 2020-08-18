@@ -1,7 +1,7 @@
 const levels = [
-    {7: 7},
-    {6: 6},
-    {5: 5},
+    // {7: 7},
+    // {6: 6},
+    // {5: 5},
     {7: 7},
     {6: 6},
     {5: 5},
@@ -14,28 +14,28 @@ const levels = [
             1: {
                 type: 'secondEnemy',
                 hp: 5,
-                damage: 2,
+                damage: 1,
                 xp: 3,
                 R: 20
             },
             2: {
                 type: 'secondEnemy',
                 hp: 5,
-                damage: 2,
+                damage: 1,
                 xp: 3,
                 R: 20
             },
             3: {
                 type: 'secondEnemy',
                 hp: 5,
-                damage: 2,
+                damage: 1,
                 xp: 3,
                 R: 20
             },
             4: {
                 type: 'secondEnemy',
                 hp: 5,
-                damage: 2,
+                damage: 1,
                 xp: 3,
                 R: 20
             }
@@ -82,7 +82,7 @@ class Store {
     screen;
 
     mouse = {x: 0, y: 0};
-    mainTank = {x: 0, y: 0, exp: 0, lvl: 0};
+    mainTank = {x: 0, y: 0, exp: 0, lvl: 0, R: 25};
     currentBasePosition = {x: 0, y: 0};
 
     // Координаты текущего уровня
@@ -145,6 +145,17 @@ class Store {
                 }
                 return true;
             }
+        }
+    };
+
+    enemyHit = (x, y, damage) => {
+        let pos = this.mainTank;
+        let R = this.mainTank.R;
+        x = x + this.currentBasePosition.x;
+        y = y + this.currentBasePosition.y;
+        if (pos.x - R < x && x < pos.x + R && pos.y - R < y && y < pos.y + R) {
+            this.addExp(-damage);
+            return true;
         }
     };
 
@@ -248,13 +259,14 @@ class Store {
 
     addExp = (exp) => {
         this.mainTank.exp += exp;
+        if (this.mainTank.exp < 0) this.mainTank.exp = 0;
         for (let i in lvl) {
 
-            if (this.mainTank.exp < lvl[i] ) {
+            if (this.mainTank.exp < lvl[i]) {
                 this.mainTank.lvl = +i - 1;
                 if (i > 0) {
 
-                    if (lvl[+i+1]) {
+                    if (lvl[+i + 1]) {
                         exp = (this.mainTank.exp - lvl[this.mainTank.lvl]) / lvl[i] * 100;
                     } else {
                         exp = 100;

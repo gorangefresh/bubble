@@ -2,29 +2,25 @@ import React, {useRef, useEffect, useState} from 'react';
 import BulletBubble from "../../Bubbles/BulletBubble";
 import Store from "../../../Store";
 
-// const type = 'bullet';
 
 function Bullet(props) {
-    const {id, coordinates, damage, tank} = props;
+    const {id, coordinates, damage, tank, target, parent} = props;
     const bullet = useRef();
     const position = {x: coordinates.x - Store.currentBasePosition.x, y: coordinates.y - Store.currentBasePosition.y};
     const baseSpeed = 6;
     const D = 10;
     const [burst, letBurst] = useState(false);
     const speed = {x: 0, y: 0};
+    const hit = parent === 'hero' ? Store.hit : Store.enemyHit;
 
     useEffect(() => {
-        // Store.checkIn(type, id, position, damage);
         getSpeed();
         move();
-        // return () => {
-        //     Store.checkOut('bullet', id);
-        // };
     },[]);
 
     const getSpeed = () => {
-        let a = Store.mouse.x - tank.x;
-        let b = Store.mouse.y - tank.y;
+        let a = target.x - tank.x;
+        let b = target.y - tank.y;
         let R = Math.sqrt(a**2 + b**2);
         let t = R / baseSpeed;
         speed.x = a / t;
@@ -46,7 +42,7 @@ function Bullet(props) {
         if (
             !Store.travel &&
             !Store.touchEdge(position.x, position.y) &&
-            !Store.hit(position.x, position.y, damage)
+            !hit(position.x, position.y, damage)
         ) {
             setTimeout(move, 10);
         } else {
