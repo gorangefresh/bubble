@@ -40,7 +40,7 @@ class Playground extends React.Component {
     }
 
     setCoordinates = () => {
-        Store.changeBaseCords(this.base.current.getBoundingClientRect());
+        if (this.base.current) Store.changeBaseCords(this.base.current.getBoundingClientRect());
     };
 
 

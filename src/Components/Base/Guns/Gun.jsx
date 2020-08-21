@@ -5,14 +5,14 @@ import Store from "../../Store";
 
 
 function Gun(props) {
-    const fireRate = 1500;
+    const fireRate = 1300;
     const gun = useRef(null);
     const damage = 1;
 
     const shoot = () => {
         if (gun.current) {
             let id = Store.getId('bullet', props.parent);
-            let pos = gun.current.getBoundingClientRect();
+            let pos = props.tank.current.getBoundingClientRect();
             Store.bullets[id] = <Bullet
                 parent={props.parent}
                 key={id}
@@ -22,7 +22,7 @@ function Gun(props) {
                 damage={damage}
                 target={Store.mainTank}
             />;
-            Store.setBullet(id);
+            Store.updateBulletPlace(id);
         }
         setTimeout(shoot, fireRate);
     };

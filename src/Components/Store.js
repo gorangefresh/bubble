@@ -1,112 +1,97 @@
+const enemies = {
+    'firstEnemy': {
+        type: 'firstEnemy',
+        hp: 3,
+        damage: 0,
+        xp: 2,
+        R: 20
+    },
+    'secondEnemy': {
+        type: 'secondEnemy',
+        hp: 5,
+        damage: 1,
+        xp: 3,
+        R: 20
+    },
+};
+
 const levels = [
-    // {7: 7},
-    // {6: 6},
-    // {5: 5},
     {7: 7},
     {6: 6},
     {5: 5},
     {4: 4},
-    {3: 3},
-    {2: 2},
+    {
+        'level': 3,
+        enemies: {
+            'secondEnemy': 4,
+            'firstEnemy': 2
+        },
+        enemy: {}
+    },
+    {
+        'level': 2,
+        enemies: {
+            'secondEnemy': 4,
+            'firstEnemy': 2
+        },
+        enemy: {}
+    },
     {
         'level': 1,
-        enemy: {
-            1: {
-                type: 'secondEnemy',
-                hp: 5,
-                damage: 1,
-                xp: 3,
-                R: 20
-            },
-            2: {
-                type: 'secondEnemy',
-                hp: 5,
-                damage: 1,
-                xp: 3,
-                R: 20
-            },
-            3: {
-                type: 'secondEnemy',
-                hp: 5,
-                damage: 1,
-                xp: 3,
-                R: 20
-            },
-            4: {
-                type: 'secondEnemy',
-                hp: 5,
-                damage: 1,
-                xp: 3,
-                R: 20
-            }
-        }
+        enemies: {
+            'firstEnemy': 4
+        },
+        enemy: {}
     },
     {
         'level': 0,
-        enemy: {
-            1: {
-                type: 'firstEnemy',
-                hp: 3,
-                damage: 0,
-                xp: 2,
-                R: 20
-            },
-            2: {
-                type: 'firstEnemy',
-                hp: 3,
-                damage: 0,
-                xp: 2,
-                R: 20
-            },
-            3: {
-                type: 'firstEnemy',
-                hp: 3,
-                damage: 0,
-                xp: 2,
-                R: 20
-            }
-        }
+        enemies: {},
+        enemy: {}
     }
 ];
 
 const lvl = {0: 0, 1: 20, 2: 60, 3: 200, 4: 500};
 
 class Store {
+
     matrixLength = (levels.length - 1) * 2;
 
     tankD = 50;
     baseD = 800;
     baseR = this.baseD / 2;
 
+    // Объект содержит все уровни с полным отражение состояния
     matrix;
-    screen;
 
-    mouse = {x: 0, y: 0};
     mainTank = {x: 0, y: 0, exp: 0, lvl: 0, R: 25};
-    currentBasePosition = {x: 0, y: 0};
 
     // Координаты текущего уровня
     y = 0;
     x = 0;
 
-    tank = {};
-    enemy = {};
+    // Координаты курсора
+    mouse = {x: 0, y: 0};
 
+    // Координаты текущего уровня
+    currentBasePosition = {x: 0, y: 0};
+
+    // Объект с летящими пулями
     bullets = {};
-    setBullet;
 
+    // Функция обновления компонента содержащего пули.
+    updateBulletPlace;
+
+    // Функция обновления базового компонента, используется при смене уровня
     screenUpdate;
 
+    // переменная состояния перемещения между уровнями
     travel = false;
 
+    // Функция обновления панели опыта
     setExp;
 
     changeBaseCords = (coordinates) => {
         this.currentBasePosition = ({x: coordinates.x + this.baseR, y: coordinates.y + this.baseR});
-    };
-
-    changeTankCoordinates = (id, coordinates, R) => {
-        this.tank[id] = {coordinates, R};
     };
 
     setMouse = e => {
@@ -159,9 +144,23 @@ class Store {
         }
     };
 
+    initLevels = () => {
+        for (let i of levels) {
+            let count = 1;
+            for (let j in i.enemies) {
+                while (i.enemies[j] > 0) {
+                    i.enemy[count] = JSON.parse(JSON.stringify(enemies[j]));
+                    i.enemies[j]--;
+                    count++;
+                }
+
+            }
+        }
+    };
+
     init = () => {
         const a = levels.length;
-
+        this.initLevels();
         const number = (x, y) => `${x}-${y}`;
 
         let r = a * 2 - 1;
@@ -253,7 +252,7 @@ class Store {
         };
 
         let delta = getDirections();
-        this.screenUpdate();
+        this.screenUpdate(`${this.x}-${this.y}`);
         return delta;
     };
 

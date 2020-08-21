@@ -7,7 +7,6 @@ import MiniMap from "./Base/MiniMap";
 
 
 function Screen() {
-    Store.screen = React.createRef();
     const [position, setPosition] = useState('');
 
     const content = [];
@@ -20,12 +19,12 @@ function Screen() {
         content.push(<Playground key={i} x={x} y={y} obj={Store.matrix[i]}/>)
     }
 
-    Store.screenUpdate = () => {
-        setPosition(Math.random());
+    Store.screenUpdate = str => {
+        setPosition(str);
     };
 
     return (
-        <div id={'screen'} className={'screen'} ref={Store.screen} onClick={onclick}>
+        <div id={'screen'} className={'screen'} onClick={onclick}>
             <FirstTank/>
             {content}
             <ExperienceBar/>

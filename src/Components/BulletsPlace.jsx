@@ -13,7 +13,7 @@ function BulletsPlace() {
     const [bullet, setBullet] = useState('');
 
     useEffect(() => {
-        Store.setBullet = setBullet;
+        Store.updateBulletPlace = setBullet;
     });
 
     let bullets = [];

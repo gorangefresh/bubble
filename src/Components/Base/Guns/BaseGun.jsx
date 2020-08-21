@@ -30,7 +30,7 @@ function BaseGun(props) {
                 damage={damage}
                 target={Store.mouse}
             />;
-            Store.setBullet(id);
+            Store.updateBulletPlace(id);
 
             setTimeout(allowFire, fireRate);
         }
