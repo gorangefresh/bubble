@@ -1,63 +1,77 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import GunBubble from '../Bubbles/GunBubble';
-import Bullet from './Bullets/Bullet';
+import Bullet from '../Bullets/Bullet';
 import Store from "../../Store";
 
 
-function BaseGun(props) {
-    const fireRate = 400;
-    const gun = useRef(null);
-    const damage = 1;
-    let shooting = {mouseDown: false, fire: true};
+class BaseGun extends React.Component {
+    fireRate = 400;
+    damage = 1;
+    bullet = Bullet;
 
-    const startShooting = () => {
-        shooting.mouseDown = true;
-        if (shooting.fire) {
-            shoot();
+    gun = React.createRef();
+    shooting = {mouseDown: false, fire: true};
+
+    startShooting = () => {
+        this.shooting.mouseDown = true;
+        if (this.shooting.fire) {
+            this.shoot();
         }
     };
 
-    const shoot = () => {
-        shooting.fire = false;
-        if (shooting.mouseDown) {
-            let id = Store.getId('bullet', props.parent);
-            Store.bullets[id] = <Bullet
-                parent={props.parent}
-                key={id}
-                id={id}
-                coordinates={gun.current.getBoundingClientRect()}
-                tank={Store.mainTank}
-                damage={damage}
-                target={Store.mouse}
-            />;
+    shoot = () => {
+        this.shooting.fire = false;
+        if (this.shooting.mouseDown) {
+            let id = Store.getId('bullet', this.props.parent);
+            Store.bullets[id] = React.createElement(
+                this.bullet,
+                {
+                    parent: this.props.parent,
+                    key: id,
+                    id: id,
+                    coordinates: this.gun.current.getBoundingClientRect(),
+                    tank: Store.mainTank,
+                    damage: this.damage,
+                    target: Store.mouse
+                }
+            );
             Store.updateBulletPlace(id);
 
-            setTimeout(allowFire, fireRate);
+            setTimeout(this.allowFire, this.fireRate);
         }
     };
 
-    const allowFire = () => {
-        shooting.fire = true;
-        if (shooting.mouseDown && gun.current) shoot();
+    allowFire = () => {
+        this.shooting.fire = true;
+        if (this.shooting.mouseDown && this.gun.current) this.shoot();
     };
 
-    const stopShooting = () => shooting.mouseDown = false;
+    stopShooting = () => this.shooting.mouseDown = false;
 
-    useEffect(() => {
-        document.addEventListener('mousedown', startShooting);
-        document.addEventListener('mouseup', stopShooting);
-        return () => {
-            document.removeEventListener('mousedown', startShooting);
-            document.removeEventListener('mouseup', stopShooting);
-        }
-    }, []);
+    componentDidMount() {
+        document.addEventListener('mousedown', this.startShooting);
+        document.addEventListener('mouseup', this.stopShooting);
+    }
 
-    return (
-        <div className={'gun'} ref={gun} style={props.position}>
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.startShooting);
+        document.removeEventListener('mouseup', this.stopShooting);
+    }
+
+    view = () => {
+        return <>
             <GunBubble w={20} left={0} top={2}/>
             <GunBubble w={12} left={0} top={-10}/>
-        </div>
-    );
+        </>
+    };
+
+    render() {
+        return (
+            <div className={'gun'} ref={this.gun} style={this.props.position}>
+                {this.view()}
+            </div>
+        );
+    }
 }
 
 export default BaseGun;

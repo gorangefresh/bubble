@@ -1,13 +1,13 @@
 import React from 'react';
 import MainBubble from '../Base/Bubbles/MainBubble';
 import Store from "../Store";
-import Gun from "../Base/Guns/Gun";
+import Gun from "./Guns/Gun";
 
 
 /** Универсальный класс компонента противника
  *
  * БАЗОВЫЕ НАСТРОЙКИ
- * baseSpeed = 2; // (px / 10ms) // 10ms - период обновления позиции
+ * baseSpeed = 2; // 1 = 100 px/s
  * width = 40; // px
  * trajectoryChangeRate = 5000; // ms
  *
@@ -52,6 +52,7 @@ class Enemy extends React.Component {
 
     burst = () => {
         Store.checkOut(this.type, this.props.enemyId);
+        Store.toEmpty();
         this.setState({burst: true});
     };
 
@@ -80,9 +81,8 @@ class Enemy extends React.Component {
         let a = x - this.position.x;
         let b = y - this.position.y;
         let R = Math.sqrt(a**2 + b**2);
-        let t = R / this.baseSpeed;
-        this.speed.x = a / t;
-        this.speed.y = b / t;
+        this.speed.x = a * this.baseSpeed / R;
+        this.speed.y = b * this.baseSpeed / R;
         if (!touchEdge && !this.state.burst) setTimeout(this.getSpeed, Math.random() * this.trajectoryChangeRate)
     };
 

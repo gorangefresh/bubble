@@ -1,6 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react';
-import BulletBubble from "../../Bubbles/BulletBubble";
-import Store from "../../../Store";
+import BulletBubble from "../Bubbles/BulletBubble";
+import Store from "../../Store";
 
 
 function Bullet(props) {

@@ -16,17 +16,40 @@ const enemies = {
 };
 
 const levels = [
-    {7: 7},
-    {6: 6},
-    {5: 5},
-    {4: 4},
+    {
+        'level': 7,
+        enemies: {
+            'secondEnemy': 4,
+            'firstEnemy': 2
+        },
+    },
+    {
+        'level': 6,
+        enemies: {
+            'secondEnemy': 4,
+            'firstEnemy': 2
+        },
+    },
+    {
+        'level': 5,
+        enemies: {
+            'secondEnemy': 4,
+            'firstEnemy': 2
+        },
+    },
+    {
+        'level': 4,
+        enemies: {
+            'secondEnemy': 4,
+            'firstEnemy': 2
+        },
+    },
     {
         'level': 3,
         enemies: {
             'secondEnemy': 4,
             'firstEnemy': 2
         },
-        enemy: {}
     },
     {
         'level': 2,
@@ -34,19 +57,17 @@ const levels = [
             'secondEnemy': 4,
             'firstEnemy': 2
         },
-        enemy: {}
     },
     {
         'level': 1,
         enemies: {
             'firstEnemy': 4
         },
-        enemy: {}
     },
     {
         'level': 0,
         enemies: {},
-        enemy: {}
+        empty: true
     }
 ];
 
@@ -106,11 +127,17 @@ class Store {
     checkIn = (type, id, coordinates, burst) => {
         this.current[type][id].coordinates = coordinates;
         this.current[type][id].burst = burst;
-
     };
 
     checkOut = (type, id) => {
         delete this.matrix[`${this.x}-${this.y}`][type][id];
+    };
+
+
+    toEmpty = () => {
+        if (Object.keys(this.matrix[`${this.x}-${this.y}`].enemy).length === 0) {
+            this.matrix[`${this.x}-${this.y}`].empty = true;
+        }
     };
 
     getId = (type, parent) => {
@@ -147,6 +174,8 @@ class Store {
     initLevels = () => {
         for (let i of levels) {
             let count = 1;
+            i.enemy = {};
+            i.empty = Object.keys(i.enemies).length === 0;
             for (let j in i.enemies) {
                 while (i.enemies[j] > 0) {
                     i.enemy[count] = JSON.parse(JSON.stringify(enemies[j]));

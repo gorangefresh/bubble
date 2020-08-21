@@ -1,6 +1,6 @@
 import React from 'react';
 import MainBubble from '../Base/Bubbles/MainBubble';
-import Gun from "../Base/Guns/Gun";
+import Gun from "./Guns/Gun";
 import Enemy from "./Enemy";
 
 class SecondEnemy extends Enemy {

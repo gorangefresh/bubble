@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Bubble from './Bubbles/Bubble';
 
 import './MiniMap.scss';
@@ -15,7 +15,8 @@ function MiniMap(props) {
     let map = [];
     for (let i in matrix) {
         let color = i === current ? currentColor : baseColor;
-        map.push(<Bubble key={i} color={color} w={bubbleWidth}/>)
+        let empty = matrix[i].empty && i !== current;
+        map.push(<Bubble key={i} color={color} w={bubbleWidth} empty={empty}/>)
     }
 
     let styles = {width: `${width}px`, height: `${width}px`, padding: `${padding}px`};
