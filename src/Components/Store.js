@@ -1,17 +1,33 @@
 const enemies = {
-    'firstEnemy': {
-        type: 'firstEnemy',
-        hp: 3,
-        damage: 0,
+    'plainEnemy': {
+        type: 'plainEnemy',
+        hp: 2,
         xp: 2,
-        R: 20
+        R: 15
     },
-    'secondEnemy': {
-        type: 'secondEnemy',
-        hp: 5,
-        damage: 1,
+    'lightEnemy': {
+        type: 'lightEnemy',
+        hp: 3,
         xp: 3,
         R: 20
+    },
+    'heavyEnemy': {
+        type: 'heavyEnemy',
+        hp: 8,
+        xp: 5,
+        R: 30
+    },
+    'minerEnemy': {
+        type: 'minerEnemy',
+        hp: 10,
+        xp: 5,
+        R: 25
+    },
+    'machineGunEnemy': {
+        type: 'machineGunEnemy',
+        hp: 5,
+        xp: 5,
+        R: 25
     },
 };
 
@@ -19,54 +35,59 @@ const levels = [
     {
         'level': 7,
         enemies: {
-            'secondEnemy': 4,
-            'firstEnemy': 2
+            'lightEnemy': 4,
+            'plainEnemy': 2
         },
     },
     {
         'level': 6,
         enemies: {
-            'secondEnemy': 4,
-            'firstEnemy': 2
+            'lightEnemy': 4,
+            'plainEnemy': 2
         },
     },
     {
         'level': 5,
         enemies: {
-            'secondEnemy': 4,
-            'firstEnemy': 2
+            'lightEnemy': 4,
+            'plainEnemy': 2
         },
     },
     {
         'level': 4,
         enemies: {
-            'secondEnemy': 4,
-            'firstEnemy': 2
+            'machineGunEnemy': 1,
+            'minerEnemy': 2,
+            'plainEnemy': 3
         },
     },
     {
         'level': 3,
         enemies: {
-            'secondEnemy': 4,
-            'firstEnemy': 2
+            'heavyEnemy': 3,
+            'lightEnemy': 1,
+            'minerEnemy': 1,
+            'plainEnemy': 1
         },
     },
     {
         'level': 2,
         enemies: {
-            'secondEnemy': 4,
-            'firstEnemy': 2
+            'lightEnemy': 4,
+            'plainEnemy': 2
         },
     },
     {
         'level': 1,
         enemies: {
-            'firstEnemy': 4
+            'plainEnemy': 4,
         },
     },
     {
         'level': 0,
-        enemies: {},
+        enemies: {
+            // 'machineGunEnemy': 1
+        },
         empty: true
     }
 ];

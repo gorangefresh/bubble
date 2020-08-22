@@ -1,11 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import Store from './Store';
-import FirstEnemy from './Enemies/FirstEnemy';
-import SecondEnemy from './Enemies/SecondEnemy';
+import PlainEnemy from './Enemies/PlainEnemy';
+import LightEnemy from './Enemies/LightEnemy';
+import HeavyEnemy from './Enemies/HeavyEnemy';
+import MinerEnemy from './Enemies/MinerEnemy';
+import MachineGunEnemy from './Enemies/MachineGunEnemy';
 
 let enemy = {
-    'firstEnemy': FirstEnemy,
-    'secondEnemy': SecondEnemy,
+    'plainEnemy': PlainEnemy,
+    'lightEnemy': LightEnemy,
+    'heavyEnemy': HeavyEnemy,
+    'minerEnemy': MinerEnemy,
+    'machineGunEnemy': MachineGunEnemy,
 };
 
 function BulletsPlace() {

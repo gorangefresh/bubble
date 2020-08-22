@@ -1,8 +1,8 @@
 import React from 'react';
-import GunBubble from '../Bubbles/GunBubble';
+import Bubble from '../Bubbles/GunBubble';
 import Bullet from '../Bullets/Bullet';
 import Store from "../../Store";
-
+import cst from '../../../const.js';
 
 class BaseGun extends React.Component {
     fireRate = 400;
@@ -60,8 +60,8 @@ class BaseGun extends React.Component {
 
     view = () => {
         return <>
-            <GunBubble w={20} left={0} top={2}/>
-            <GunBubble w={12} left={0} top={-10}/>
+            <Bubble color={cst.gunColor1} w={20} left={0} top={2}/>
+            <Bubble color={cst.gunColor1} w={12} left={0} top={-10}/>
         </>
     };
 

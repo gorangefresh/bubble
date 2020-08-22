@@ -8,8 +8,7 @@ function GunBubble(props) {
 
     return (
         <div className={'bubble-wrap'} style={{left: `${left}px`, top: `${top}px`}}>
-            <svg viewBox={viewBox}
-                 style={{width: `${w}px`, height: `${h ? h : w}px`}}>
+            <svg viewBox={viewBox} style={{width: `${w}px`, height: `${h ? h : w}px`}}>
                 <Edge color={'#cba815'}/>
                 <LowOpacity color={'#cba815'}/>
             </svg>

@@ -1,8 +1,8 @@
 import React from 'react';
-import MainBubble from '../Base/Bubbles/MainBubble';
+import Bubble from '../Base/Bubbles/Bubble';
 import Store from "../Store";
 import Gun from "./Guns/Gun";
-
+import cst from '../../const';
 
 /** Универсальный класс компонента противника
  *
@@ -24,6 +24,7 @@ class Enemy extends React.Component {
     speed = {x: 0, y: 0};
     R = this.width / 2;
     position = {};
+    destination={};
 
     constructor(props) {
         super(props);
@@ -78,6 +79,8 @@ class Enemy extends React.Component {
     getSpeed = (touchEdge) => {
         let x = Math.random() * Store.baseR * this.randomSign();
         let y = Math.random() * Store.baseR * this.randomSign();
+        this.destination.x = x + Store.currentBasePosition.x;
+        this.destination.y = y + Store.currentBasePosition.y;
         let a = x - this.position.x;
         let b = y - this.position.y;
         let R = Math.sqrt(a**2 + b**2);
@@ -87,19 +90,19 @@ class Enemy extends React.Component {
     };
 
     turn = () => {
-        const getAngle = (center, point) => {
-            return 180 * Math.atan2(point.y - center.y, point.x - center.x) / Math.PI + 90;
-        };
-
         if (this.tank.current) {
-            let angle = getAngle(this.tank.current.getBoundingClientRect(), Store.mainTank);
+            let angle = this.getAngle(this.tank.current.getBoundingClientRect(), Store.mainTank);
             this.tank.current.style.transform = `rotate(${angle}deg)`;
         }
     };
 
+    getAngle = (center, point) => {
+        return 180 * Math.atan2(point.y - center.y, point.x - center.x) / Math.PI + 90;
+    };
+
     view = () => {
         return <>
-            <MainBubble w={this.width} color={'#95f7ff'}/>
+            <Bubble w={this.width} color={cst.enemyColor1}/>
             <Gun
                 parent={this.type}
                 position={{left: '0px', top: '0px'}}

@@ -1,5 +1,5 @@
 import React from 'react';
-import MainBubble from '../Bubbles/MainBubble';
+import Bubble from '../Bubbles/Bubble';
 import BaseGun from '../Guns/BaseGun';
 import Store from "../../Store";
 import HighOpacity from "../Gradients/OpacityGradients/HighOpacity";
@@ -153,7 +153,7 @@ class Tank extends React.Component {
                         <HighOpacity color={'#fafafa'}/>
                     </svg>
                 </div>
-                <MainBubble w={this.width} color={this.mainColor}/>
+                <Bubble w={this.width} color={this.mainColor}/>
                 {this.view()}
             </div>
         );

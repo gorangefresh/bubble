@@ -1,15 +1,17 @@
 import React from 'react';
-import MainBubble from '../Base/Bubbles/MainBubble';
+import Bubble from '../Base/Bubbles/Bubble';
 import Gun from "./Guns/Gun";
 import Enemy from "./Enemy";
+import cst from '../../const';
 
-class SecondEnemy extends Enemy {
+class LightEnemy extends Enemy {
     baseSpeed = 2;
     width = 40;
 
+
     view = () => {
         return <>
-            <MainBubble w={this.width} color={'#95f7ff'}/>
+            <Bubble w={this.width} color={cst.enemyColor1}/>
             <Gun
                 parent={this.type}
                 position={{left: '0px', top: '0px'}}
@@ -19,4 +21,4 @@ class SecondEnemy extends Enemy {
     };
 }
 
-export default SecondEnemy;
+export default LightEnemy;
