@@ -10,8 +10,8 @@ function Bubble(props) {
     return (
         <div className={`bubble-wrap ${props.class ? props.class : ''}`} style={{left: `${left}px`, top: `${top}px`}}>
             <svg viewBox={viewBox} style={{width: `${w}px`, height: `${h ? h : w}px`}}>
-                <LowOpacity color={color}/>
-                <Edge color={color}/>
+                <LowOpacity color={color} w={w}/>
+                <Edge color={color} w={w}/>
             </svg>
         </div>
     );

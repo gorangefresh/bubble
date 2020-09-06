@@ -1,6 +1,7 @@
 import React from 'react';
 import BulletBubble from "../Bubbles/BulletBubble";
 import Store from "../../Store";
+import cst from '../../../const.js';
 
 class Bullet extends React.Component {
     baseSpeed = 6;
@@ -21,16 +22,17 @@ class Bullet extends React.Component {
     }
 
     componentDidMount() {
-        this.getSpeed();
+        this.getSpeed(this.props.target);
         this.baseSpeed !== 0 ? this.move() : this.stay();
+        if (typeof this.setStart === 'function') this.setStart();
     }
 
     componentDidUpdate() {
         if (this.state.burst) delete Store.bullets[this.props.id];
     }
 
-    getSpeed = () => {
-        const {tank, target} = this.props;
+    getSpeed = target => {
+        const {tank} = this.props;
 
         let a = target.x - tank.x;
         let b = target.y - tank.y;
@@ -66,7 +68,7 @@ class Bullet extends React.Component {
         }
     };
 
-    view = () => <BulletBubble w={this.D}/>;
+    view = () => <BulletBubble w={this.D} color={cst.bulletColor1}/>;
 
     render() {
         let content;

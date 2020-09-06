@@ -1,12 +1,12 @@
 import React from 'react';
 
 function Edge(props) {
-    const {color} = props;
+    const {color, w} = props;
     return (
         <>
             <defs>
                 <radialGradient
-                    id={`gradient--edge-${color}`}
+                    id={`gradient--edge-${color}-${w ? w : ''}`}
                     fx="30%"
                     fy="30%"
                 >
@@ -15,9 +15,9 @@ function Edge(props) {
                     <stop offset="100%" stopColor="white" stopOpacity=".9"/>
                 </radialGradient>
 
-                <mask id={`mask--edge-${color}`}>
+                <mask id={`mask--edge-${color}-${w ? w : ''}`}>
                     <rect
-                        fill={`url(#gradient--edge-${color})`}
+                        fill={`url(#gradient--edge-${color}-${w ? w : ''})`}
                         width="100%"
                         height="100%"
                     ></rect>
@@ -26,7 +26,7 @@ function Edge(props) {
 
             <circle r="50%" cx="50%" cy="50%"
                     fill={color}
-                    mask={`url(#mask--edge-${color})`}>
+                    mask={`url(#mask--edge-${color}-${w ? w : ''})`}>
             </circle>
         </>
     );

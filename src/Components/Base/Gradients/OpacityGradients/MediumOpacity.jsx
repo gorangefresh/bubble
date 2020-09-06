@@ -1,12 +1,12 @@
 import React from 'react';
 
 function MediumOpacity(props) {
-    const {color} = props;
+    const {color, w} = props;
     return (
         <>
             <defs>
                 <radialGradient
-                    id={`opacity--medium-${color}`}
+                    id={`opacity--medium-${color}-${w ? w : ''}`}
                     fx="25%"
                     fy="25%"
                 >
@@ -16,9 +16,9 @@ function MediumOpacity(props) {
                     <stop offset="100%" stopColor="black"/>
                 </radialGradient>
 
-                <mask id={`mask--medium-${color}`}>
+                <mask id={`mask--medium-${color}-${w ? w : ''}`}>
                     <rect
-                        fill={`url(#opacity--medium-${color})`}
+                        fill={`url(#opacity--medium-${color}-${w ? w : ''})`}
                         width="100%"
                         height="100%"
                     ></rect>
@@ -27,7 +27,7 @@ function MediumOpacity(props) {
 
             <circle r="50%" cx="50%" cy="50%"
                     fill={color}
-                    mask={`url(#mask--medium-${color})`}>
+                    mask={`url(#mask--medium-${color}-${w ? w : ''})`}>
             </circle>
         </>
     );

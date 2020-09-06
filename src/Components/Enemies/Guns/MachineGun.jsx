@@ -5,7 +5,7 @@ import Gun from "./Gun";
 import Bullet from "../../Base/Bullets/Bullet";
 
 class MachineGun extends Gun {
-    fireRate = 200;
+    fireRate = 300;
     damage = 1;
     bullet = Bullet;
 

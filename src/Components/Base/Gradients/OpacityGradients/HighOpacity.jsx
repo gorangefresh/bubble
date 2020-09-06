@@ -1,12 +1,12 @@
 import React from 'react';
 
 function HighOpacity(props) {
-    const {color} = props;
+    const {color, w} = props;
     return (
         <>
             <defs>
                 <radialGradient
-                    id={`opacity--high-${color}`}
+                    id={`opacity--high-${color}-${w ? w : ''}`}
                     fy="10%">
                     <stop offset="60%"
                           stopColor="black"
@@ -19,9 +19,9 @@ function HighOpacity(props) {
                 </radialGradient>
 
 
-                <mask id={`mask--high-${color}`}>
+                <mask id={`mask--high-${color}-${w ? w : ''}`}>
                     <rect
-                        fill={`url(#opacity--high-${color})`}
+                        fill={`url(#opacity--high-${color}-${w ? w : ''})`}
                           width="100%" height="100%"></rect>
                 </mask>
 
@@ -29,7 +29,7 @@ function HighOpacity(props) {
 
             <circle r="50%" cx="50%" cy="50%"
                     fill={color}
-                    mask={`url(#mask--high-${color})`}>
+                    mask={`url(#mask--high-${color}-${w ? w : ''})`}>
             </circle>
 
         </>

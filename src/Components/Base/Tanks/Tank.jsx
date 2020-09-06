@@ -3,7 +3,7 @@ import Bubble from '../Bubbles/Bubble';
 import BaseGun from '../Guns/BaseGun';
 import Store from "../../Store";
 import HighOpacity from "../Gradients/OpacityGradients/HighOpacity";
-
+import cst from "../../../const";
 
 class Tank extends React.Component {
     speed = 20;
@@ -141,6 +141,7 @@ class Tank extends React.Component {
 
     view = () => {
         return <>
+            <Bubble w={this.width} color={this.mainColor}/>
             <BaseGun parent={this.type} position={{left: '0px', top: '0px'}}/>
         </>
     };
@@ -149,11 +150,10 @@ class Tank extends React.Component {
         return (
             <div className={'tank-wrap'} ref={this.tank}>
                 <div className={'bubble-wrap'} style={{display: 'none'}} ref={this.travelBubble}>
-                    <svg id={'travel'} viewBox={'0 0 100 100'} style={{width: '100px', height: '100px'}}>
-                        <HighOpacity color={'#fafafa'}/>
+                    <svg id={'travel'} viewBox={`0 0 ${this.width*2} ${this.width*2}`} style={{width: `${this.width*2}px`, height: `${this.width*2}px`}}>
+                        <HighOpacity color={cst.travelColor} w={this.width*2}/>
                     </svg>
                 </div>
-                <Bubble w={this.width} color={this.mainColor}/>
                 {this.view()}
             </div>
         );

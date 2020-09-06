@@ -1,6 +1,7 @@
 import React from 'react';
 import BulletBubble from "../Bubbles/BulletBubble";
 import Bullet from "./Bullet";
+import cst from "../../../const";
 
 class Mine extends Bullet {
     baseSpeed = 0;
@@ -13,12 +14,12 @@ class Mine extends Bullet {
 
         return <>
             <BulletBubble w={this.D}/>
-            <BulletBubble w={5} top={-8} left={-6}/>
-            <BulletBubble w={5} top={0} left={-6}/>
-            <BulletBubble w={5} top={-8} left={6}/>
-            <BulletBubble w={5} top={0} left={6}/>
-            <BulletBubble w={5} top={-11} left={0}/>
-            <BulletBubble w={5} top={2} left={0}/>
+            <BulletBubble w={5} top={-8} left={-6} color={cst.bulletColor3}/>
+            <BulletBubble w={5} top={0} left={-6} color={cst.bulletColor3}/>
+            <BulletBubble w={5} top={-8} left={6} color={cst.bulletColor3}/>
+            <BulletBubble w={5} top={0} left={6} color={cst.bulletColor3}/>
+            <BulletBubble w={5} top={-11} left={0} color={cst.bulletColor3}/>
+            <BulletBubble w={5} top={2} left={0} color={cst.bulletColor3}/>
         </>
     };
 }
