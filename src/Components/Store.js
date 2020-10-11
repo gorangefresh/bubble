@@ -92,7 +92,7 @@ const levels = [
     }
 ];
 
-const lvl = {0: 0, 1: 20, 2: 60, 3: 200, 4: 500};
+const lvl = {0: 0, 1: 5, 2: 60, 3: 200, 4: 500};
 
 class Store {
 
@@ -105,7 +105,15 @@ class Store {
     // Объект содержит все уровни с полным отражение состояния
     matrix;
 
-    mainTank = {x: 0, y: 0, exp: 0, lvl: 0, R: 25};
+    mainTank = {
+        x: 0,
+        y: 0,
+        exp: 0,
+        lvl: 0,
+        R: 25
+    };
+
+    tankClass = 'light';
 
     // Координаты текущего уровня
     y = 0;
@@ -126,11 +134,17 @@ class Store {
     // Функция обновления базового компонента, используется при смене уровня
     screenUpdate;
 
+    // Улучшаем танк
+    upgrade;
+
     // переменная состояния перемещения между уровнями
     travel = false;
 
     // Функция обновления панели опыта
     setExp;
+
+    //
+    current;
 
     changeBaseCords = (coordinates) => {
         this.currentBasePosition = ({x: coordinates.x + this.baseR, y: coordinates.y + this.baseR});
@@ -138,11 +152,6 @@ class Store {
 
     setMouse = e => {
         this.mouse = {x: e.x, y: e.y}
-    };
-
-    setMainTank = (position) => {
-        this.mainTank.x = position.x;
-        this.mainTank.y = position.y;
     };
 
     checkIn = (type, id, coordinates, burst) => {
@@ -312,7 +321,11 @@ class Store {
         for (let i in lvl) {
 
             if (this.mainTank.exp < lvl[i]) {
-                this.mainTank.lvl = +i - 1;
+                if (this.mainTank.lvl !== +i - 1) {
+                    this.mainTank.lvl = +i - 1;
+                    this.upgrade(this.mainTank.lvl);
+                }
+
                 if (i > 0) {
 
                     if (lvl[+i + 1]) {

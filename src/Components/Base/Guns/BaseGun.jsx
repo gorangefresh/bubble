@@ -23,22 +23,43 @@ class BaseGun extends React.Component {
         this.shooting.fire = false;
         if (this.shooting.mouseDown) {
             let id = Store.getId('bullet', this.props.parent);
+
+            let target = {};
+            let cords = this.gun.current.getBoundingClientRect();
+
+            if (this.props.angle) {
+                this.turn(target, cords);
+            } else {
+                target = Store.mouse;
+            }
+
             Store.bullets[id] = React.createElement(
                 this.bullet,
                 {
                     parent: this.props.parent,
                     key: id,
                     id: id,
-                    coordinates: this.gun.current.getBoundingClientRect(),
+                    coordinates: cords,
                     tank: Store.mainTank,
                     damage: this.damage,
-                    target: Store.mouse
+                    target: target,
+                    angle: this.props.angle
                 }
             );
             Store.updateBulletPlace(id);
 
             setTimeout(this.allowFire, this.fireRate);
         }
+    };
+
+    turn = (target, cords) => {
+        let angle = Math.PI * this.props.angle / 180;
+        let x = Store.mouse.x - cords.x;
+        let y = Store.mouse.y - cords.y;
+        target.x = x * Math.cos(angle) - y * Math.sin(angle);
+        target.y = x * Math.sin(angle) + y * Math.cos(angle);
+        target.x += cords.x;
+        target.y += cords.y;
     };
 
     allowFire = () => {
@@ -60,14 +81,17 @@ class BaseGun extends React.Component {
 
     view = () => {
         return <>
-            <Bubble color={cst.gunColor1} w={20} left={0} top={2}/>
-            <Bubble color={cst.gunColor1} w={12} left={0} top={-10}/>
+            <Bubble color={cst.gunColor1} w={15} left={0} top={2}/>
+            <Bubble color={cst.gunColor1} w={10} left={0} top={-10}/>
         </>
     };
 
     render() {
+        let style = this.props.position;
+        if (this.props.angle) style.transform = `rotate(${this.props.angle}deg)`;
+
         return (
-            <div className={'gun'} ref={this.gun} style={this.props.position}>
+            <div className={'gun'} ref={this.gun} style={style}>
                 {this.view()}
             </div>
         );

@@ -1,12 +1,11 @@
 import React from 'react';
 import Tank from "./Tank";
-import BaseGun from '../Guns/BaseGun';
 import RocketLauncher from '../Guns/RocketLauncher';
 import Bubble from "../Bubbles/Bubble";
 import cst from "../../../const";
 
 
-class Balanced1 extends Tank {
+class Balanced2 extends Tank {
     speed = 20;
     width  = 40;
 
@@ -26,4 +25,4 @@ class Balanced1 extends Tank {
     };
 }
 
-export default Balanced1;
+export default Balanced2;

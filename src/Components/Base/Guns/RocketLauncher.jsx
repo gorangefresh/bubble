@@ -5,8 +5,8 @@ import cst from '../../../const.js';
 import BaseGun from './BaseGun';
 
 class RocketLauncher extends BaseGun {
-    fireRate = 1500;
-    damage = 2;
+    fireRate = 1000;
+    damage = this.props.damage ? this.props.damage : 2;
     bullet = BulletHunter;
 
     view = () => {

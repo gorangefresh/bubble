@@ -5,7 +5,7 @@ import Bubble from "../Bubbles/Bubble";
 import cst from "../../../const";
 
 
-class Light1 extends Tank {
+class Light2 extends Tank {
     speed = 25;
     width  = 40;
 
@@ -20,4 +20,4 @@ class Light1 extends Tank {
     };
 }
 
-export default Light1;
+export default Light2;

@@ -7,13 +7,12 @@ import cst from "../../../const";
 
 class Tank extends React.Component {
     speed = 20;
-    width  = 50;
+    width = 40;
     mainColor = '#234ecd';
 
     type = 'hero';
     halfSpeed = this.speed * .66;
     pressed = {};
-    position = {x: document.body.offsetWidth / 2, y: document.body.offsetHeight / 2};
 
     constructor(props) {
         super(props);
@@ -22,7 +21,13 @@ class Tank extends React.Component {
         this.travelBubble = React.createRef();
         Store.mainTank.R = this.width / 2;
         Store.tankD = this.width;
+        if (!Store.mainTank.x) this.setPosition();
     }
+
+    setPosition = () => {
+        Store.mainTank.x = document.body.offsetWidth / 2;
+        Store.mainTank.y = document.body.offsetHeight / 2;
+    };
 
     addKey = e => this.pressed[e.code] = true;
 
@@ -48,16 +53,18 @@ class Tank extends React.Component {
             this.move();
         };
 
-        Store.travel = true;
-        this.travelBubble.current.style.display = 'flex';
-        let delta = Store.changeLevel();
-        this.tank.current.style.transition = 'left .7s linear, top .7s linear';
-        this.position.x += delta.x;
-        this.position.y += delta.y;
+        if (this.tank.current && this.travelBubble.current) {
+            Store.travel = true;
+            this.travelBubble.current.style.display = 'flex';
+            let delta = Store.changeLevel();
+            this.tank.current.style.transition = 'left .7s linear, top .7s linear';
+            Store.mainTank.x += delta.x;
+            Store.mainTank.y += delta.y;
 
-        this.tank.current.style.left = `${this.position.x}px`;
-        this.tank.current.style.top = `${this.position.y}px`;
-        setTimeout(continueMoving, 600)
+            this.tank.current.style.left = `${Store.mainTank.x}px`;
+            this.tank.current.style.top = `${Store.mainTank.y}px`;
+            setTimeout(continueMoving, 600)
+        }
     };
 
     move = () => {
@@ -66,13 +73,12 @@ class Tank extends React.Component {
         this.goLeft();
         this.goRight();
         if (this.tank.current) {
-            this.tank.current.style.left = `${this.position.x}px`;
-            this.tank.current.style.top = `${this.position.y}px`;
-            Store.setMainTank(this.tank.current.getBoundingClientRect());
+            this.tank.current.style.left = `${Store.mainTank.x}px`;
+            this.tank.current.style.top = `${Store.mainTank.y}px`;
             this.turn();
         }
 
-        if (Store.touchEdge(this.position.x - Store.currentBasePosition.x, this.position.y - Store.currentBasePosition.y)) {
+        if (Store.touchEdge(Store.mainTank.x - Store.currentBasePosition.x, Store.mainTank.y - Store.currentBasePosition.y)) {
             if (!Store.travel) {
                 return this.travel();
             }
@@ -89,18 +95,18 @@ class Tank extends React.Component {
     goUp = () => {
         if (this.pressed['KeyW'] && !this.pressed['KeyS']) {
             if (this.pressed['KeyA'] || this.pressed['KeyD']) {
-                this.position.y = this.position.y - this.halfSpeed;
+                Store.mainTank.y = Store.mainTank.y - this.halfSpeed;
             } else {
-                this.position.y = this.position.y - this.speed;
+                Store.mainTank.y = Store.mainTank.y - this.speed;
             }
         }
     };
     goDown = () => {
         if (this.pressed['KeyS'] && !this.pressed['KeyW']) {
             if (this.pressed['KeyA'] || this.pressed['KeyD']) {
-                this.position.y = this.position.y + this.halfSpeed;
+                Store.mainTank.y = Store.mainTank.y + this.halfSpeed;
             } else {
-                this.position.y = this.position.y + this.speed;
+                Store.mainTank.y = Store.mainTank.y + this.speed;
             }
         }
 
@@ -108,9 +114,9 @@ class Tank extends React.Component {
     goLeft = () => {
         if (this.pressed['KeyA'] && !this.pressed['KeyD']) {
             if (this.pressed['KeyS'] || this.pressed['KeyW']) {
-                this.position.x = this.position.x - this.halfSpeed;
+                Store.mainTank.x = Store.mainTank.x - this.halfSpeed;
             } else {
-                this.position.x = this.position.x - this.speed;
+                Store.mainTank.x = Store.mainTank.x - this.speed;
             }
         }
 
@@ -118,9 +124,9 @@ class Tank extends React.Component {
     goRight = () => {
         if (this.pressed['KeyD'] && !this.pressed['KeyA']) {
             if (this.pressed['KeyS'] || this.pressed['KeyW']) {
-                this.position.x = this.position.x + this.halfSpeed;
+                Store.mainTank.x = Store.mainTank.x + this.halfSpeed;
             } else {
-                this.position.x = this.position.x + this.speed;
+                Store.mainTank.x = Store.mainTank.x + this.speed;
             }
         }
     };
@@ -141,8 +147,11 @@ class Tank extends React.Component {
 
     view = () => {
         return <>
-            <Bubble w={this.width} color={this.mainColor}/>
-            <BaseGun parent={this.type} position={{left: '0px', top: '0px'}}/>
+            <Bubble left={-9} top={6} w={this.width / 3} color={this.mainColor}/>
+            <Bubble left={9} top={6} w={this.width / 3} color={this.mainColor}/>
+            <Bubble left={0} top={9} w={this.width / 3} color={this.mainColor}/>
+            <Bubble left={0} top={-5} w={this.width / 2} color={this.mainColor}/>
+            <BaseGun parent={this.type} position={{left: '0px', top: '-6px'}}/>
         </>
     };
 
@@ -150,8 +159,9 @@ class Tank extends React.Component {
         return (
             <div className={'tank-wrap'} ref={this.tank}>
                 <div className={'bubble-wrap'} style={{display: 'none'}} ref={this.travelBubble}>
-                    <svg id={'travel'} viewBox={`0 0 ${this.width*2} ${this.width*2}`} style={{width: `${this.width*2}px`, height: `${this.width*2}px`}}>
-                        <HighOpacity color={cst.travelColor} w={this.width*2}/>
+                    <svg id={'travel'} viewBox={`0 0 ${this.width * 2} ${this.width * 2}`}
+                         style={{width: `${this.width * 2}px`, height: `${this.width * 2}px`}}>
+                        <HighOpacity color={cst.travelColor} w={this.width * 2}/>
                     </svg>
                 </div>
                 {this.view()}

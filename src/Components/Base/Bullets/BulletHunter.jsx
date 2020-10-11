@@ -13,8 +13,6 @@ class BulletHunter extends Bullet {
         setTimeout(() => this.capture = true, 200)
     };
 
-    targetCapture = number => Store.current.enemy[number].coordinates;
-
     getSpeed = target => {
         if (target) {
             this.target = JSON.parse(JSON.stringify(target));
@@ -26,7 +24,10 @@ class BulletHunter extends Bullet {
                 this.capture = false;
                 return;
             }
-            this.target = this.targetCapture(enemies[0]);
+            if (!this.targetNumber || !Store.current.enemy[this.targetNumber]) {
+                this.targetNumber = this.targetSelection();
+            }
+            this.target = Store.current.enemy[this.targetNumber].coordinates;
         }
 
         let a = this.target.x - this.position.x;
@@ -36,6 +37,31 @@ class BulletHunter extends Bullet {
         this.speed.y = b * this.baseSpeed / R;
         this.turn();
     };
+
+    targetSelection = () => {
+        const getMin = obj => {
+            let min;
+            for (let i in obj) {
+                if (!min) {
+                    min = i;
+                } else {
+                    if (obj[i] < obj[min]) min = i;
+                }
+            }
+            return min;
+        };
+
+        let enemies = {};
+        for (let i in Store.current.enemy) {
+            let target = Store.current.enemy[i].coordinates;
+            let a = target.x - this.position.x;
+            let b = target.y - this.position.y;
+            enemies[i] = Math.sqrt(a ** 2 + b ** 2);
+        }
+        return getMin(enemies);
+    };
+
+
 
     move = () => {
         if (this.capture) {
