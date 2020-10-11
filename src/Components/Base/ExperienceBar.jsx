@@ -8,15 +8,13 @@ function ExperienceBar() {
 
     useEffect(() => {
         Store.setExp = setExp;
-    });
+    }, []);
 
 
     return (
         <div className={'experience-bar'}>
             <div className={'stripe'}>
-                <div className={'inner-stripe'} style={{width: `${exp}%`}}>
-
-                </div>
+                <div className={'inner-stripe'} style={{width: `${exp}%`}}></div>
             </div>
         </div>
     );

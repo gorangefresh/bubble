@@ -17,7 +17,7 @@ class Gun extends React.Component {
     }
 
     shoot = () => {
-        if (this.gun.current) {
+        if (this.gun.current && !Store.pause) {
             let id = Store.getId('bullet', this.props.parent);
             let pos = this.gun.current.getBoundingClientRect();
             Store.bullets[id] = React.createElement(

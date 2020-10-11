@@ -1,5 +1,3 @@
-import React from "react";
-
 const cst = {
     gunColor1: '#cbc165',
     gunColor2: '#cb705a',

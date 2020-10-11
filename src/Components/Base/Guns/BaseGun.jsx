@@ -21,7 +21,7 @@ class BaseGun extends React.Component {
 
     shoot = () => {
         this.shooting.fire = false;
-        if (this.shooting.mouseDown) {
+        if (this.shooting.mouseDown && !Store.pause) {
             let id = Store.getId('bullet', this.props.parent);
 
             let target = {};
@@ -53,13 +53,15 @@ class BaseGun extends React.Component {
     };
 
     turn = (target, cords) => {
-        let angle = Math.PI * this.props.angle / 180;
-        let x = Store.mouse.x - cords.x;
-        let y = Store.mouse.y - cords.y;
-        target.x = x * Math.cos(angle) - y * Math.sin(angle);
-        target.y = x * Math.sin(angle) + y * Math.cos(angle);
-        target.x += cords.x;
-        target.y += cords.y;
+        if (!Store.pause) {
+            let angle = Math.PI * this.props.angle / 180;
+            let x = Store.mouse.x - cords.x;
+            let y = Store.mouse.y - cords.y;
+            target.x = x * Math.cos(angle) - y * Math.sin(angle);
+            target.y = x * Math.sin(angle) + y * Math.cos(angle);
+            target.x += cords.x;
+            target.y += cords.y;
+        }
     };
 
     allowFire = () => {

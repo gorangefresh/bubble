@@ -59,33 +59,36 @@ class Enemy extends React.Component {
 
     move = () => {
         if (!this.state.burst) {
-            this.position.x += this.speed.x;
-            this.position.y += this.speed.y;
-            if (this.tank.current) {
-                this.tank.current.style.left = `${this.position.x}px`;
-                this.tank.current.style.top = `${this.position.y}px`;
-                Store.current[this.type][this.props.enemyId].coordinates = {x: this.position.x, y: this.position.y};
-                this.turn();
-            }
+            if (!Store.pause) {
+                this.position.x += this.speed.x;
+                this.position.y += this.speed.y;
+                if (this.tank.current) {
+                    this.tank.current.style.left = `${this.position.x}px`;
+                    this.tank.current.style.top = `${this.position.y}px`;
+                    Store.current[this.type][this.props.enemyId].coordinates = {x: this.position.x, y: this.position.y};
+                    this.turn();
+                }
 
-            if (Store.touchEdge(this.position.x, this.position.y, this.R)) {
-                this.getSpeed(true);
+                if (Store.touchEdge(this.position.x, this.position.y, this.R)) {
+                    this.getSpeed(true);
+                }
             }
-
             if (this.tank.current) setTimeout(this.move, 10);
         }
     };
 
     getSpeed = (touchEdge) => {
-        let x = Math.random() * Store.baseR * this.randomSign();
-        let y = Math.random() * Store.baseR * this.randomSign();
-        this.destination.x = x + Store.currentBasePosition.x;
-        this.destination.y = y + Store.currentBasePosition.y;
-        let a = x - this.position.x;
-        let b = y - this.position.y;
-        let R = Math.sqrt(a**2 + b**2);
-        this.speed.x = a * this.baseSpeed / R;
-        this.speed.y = b * this.baseSpeed / R;
+        if (!Store.pause) {
+            let x = Math.random() * Store.baseR * this.randomSign();
+            let y = Math.random() * Store.baseR * this.randomSign();
+            this.destination.x = x + Store.currentBasePosition.x;
+            this.destination.y = y + Store.currentBasePosition.y;
+            let a = x - this.position.x;
+            let b = y - this.position.y;
+            let R = Math.sqrt(a**2 + b**2);
+            this.speed.x = a * this.baseSpeed / R;
+            this.speed.y = b * this.baseSpeed / R;
+        }
         if (!touchEdge && !this.state.burst) setTimeout(this.getSpeed, Math.random() * this.trajectoryChangeRate)
     };
 

@@ -92,9 +92,11 @@ const levels = [
     }
 ];
 
-const lvl = {0: 0, 1: 5, 2: 60, 3: 200, 4: 500};
+const lvl = {0: 0, 1: 5, 2: 30, 3: 100, 4: 250, 5: 500};
 
 class Store {
+    // Пауза
+    pause = false;
 
     matrixLength = (levels.length - 1) * 2;
 
@@ -142,6 +144,9 @@ class Store {
 
     // Функция обновления панели опыта
     setExp;
+
+    // Функция активирующая меню выбора
+    select = () => null;
 
     //
     current;
@@ -315,7 +320,7 @@ class Store {
         return delta;
     };
 
-    addExp = (exp) => {
+    addExp = async (exp) => {
         this.mainTank.exp += exp;
         if (this.mainTank.exp < 0) this.mainTank.exp = 0;
         for (let i in lvl) {
@@ -323,6 +328,12 @@ class Store {
             if (this.mainTank.exp < lvl[i]) {
                 if (this.mainTank.lvl !== +i - 1) {
                     this.mainTank.lvl = +i - 1;
+
+                    this.pause = true;
+                    this.select(true);
+
+                    await this.selectMenu();
+
                     this.upgrade(this.mainTank.lvl);
                 }
 
@@ -341,6 +352,25 @@ class Store {
             }
         }
     };
+
+    delay = ms => {
+        return new Promise(r => setTimeout(() => r(), ms))
+    };
+
+    selectMenu = async () => {
+        if (this.pause) {
+            await this.delay(100);
+            return await this.selectMenu();
+        } else {
+            return 1;
+        }
+    };
+
+    changeClass = newClass => {
+        this.tankClass = newClass;
+        this.select(false);
+        this.pause = false;
+    }
 }
 
 export default new Store();

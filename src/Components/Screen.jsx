@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Tank from './Base/Tanks/Tank';
 import Store from './Store';
 import Playground from "./Playground";
+import SelectionMenu from "./Base/SelectionMenu";
 import ExperienceBar from "./Base/ExperienceBar";
 import MiniMap from "./Base/MiniMap";
 import Light1 from "./Base/Tanks/Light1";
@@ -15,7 +16,7 @@ import Heavy2 from "./Base/Tanks/Heavy2";
 import Heavy3 from "./Base/Tanks/Heavy3";
 import Destroyer from "./Base/Tanks/Destroyer";
 
-const Tanks  = {
+const Tanks = {
     0: {light: <Tank/>, heavy: <Tank/>, balanced: <Tank/>},
     1: {light: <Light1/>, heavy: <Heavy1/>, balanced: <Balanced1/>},
     2: {light: <Light2/>, heavy: <Heavy2/>, balanced: <Balanced2/>},
@@ -25,7 +26,8 @@ const Tanks  = {
 
 function Screen() {
     const [position, setPosition] = useState('');
-    const [lvl, setLvl] = useState(3);
+    const [lvl, setLvl] = useState(0);
+    const [select, setSelect] = useState(false);
 
     const content = [];
 
@@ -37,20 +39,23 @@ function Screen() {
         content.push(<Playground key={i} x={x} y={y} obj={Store.matrix[i]}/>)
     }
 
-    Store.upgrade = lvl => {
-        setLvl(lvl);
-    };
+    useEffect(() => {
+        Store.upgrade = setLvl;
 
-    Store.screenUpdate = str => {
-        setPosition(str);
-    };
+        Store.select = setSelect;
+
+        Store.screenUpdate = setPosition;
+    }, []);
+
+    let selectionMenu = select ? <SelectionMenu/> : null;
 
     return (
         <div id={'screen'} className={'screen'} onClick={onclick}>
-            {Tanks[4][Store.tankClass]}
+            {selectionMenu}
+            {Tanks[lvl][Store.tankClass]}
             {content}
             <ExperienceBar/>
-            <MiniMap matrix={Store.matrix} current={`${Store.x}-${Store.y}`} length={Store.matrixLength+1}/>
+            <MiniMap matrix={Store.matrix} current={`${Store.x}-${Store.y}`} length={Store.matrixLength + 1}/>
         </div>
     );
 }

@@ -42,30 +42,32 @@ class Bullet extends React.Component {
     };
 
     move = () => {
-        this.position.x += this.speed.x;
-        this.position.y += this.speed.y;
-        if (!this.state.burst && this.bullet.current) {
-            this.bullet.current.style.left = `${this.position.x}px`;
-            this.bullet.current.style.top = `${this.position.y}px`;
-        }
+        if (!Store.pause) {
+            this.position.x += this.speed.x;
+            this.position.y += this.speed.y;
+            if (!this.state.burst && this.bullet.current) {
+                this.bullet.current.style.left = `${this.position.x}px`;
+                this.bullet.current.style.top = `${this.position.y}px`;
+            }
 
-        if (
-            !Store.travel &&
-            !Store.touchEdge(this.position.x, this.position.y) &&
-            !this.hit(this.position.x, this.position.y, this.props.damage)
-        ) {
-            setTimeout(this.move, 10);
-        } else {
-            this.setState({burst: true});
+            if (
+                Store.travel ||
+                Store.touchEdge(this.position.x, this.position.y) ||
+                this.hit(this.position.x, this.position.y, this.props.damage)
+            ) {
+                return this.setState({burst: true});
+            }
         }
+        setTimeout(this.move, 10);
     };
 
     stay = () => {
-        if (!Store.travel && !this.hit(this.position.x, this.position.y, this.props.damage)) {
-            setTimeout(this.stay, 10);
-        } else {
-            this.setState({burst: true});
+        if (!Store.pause) {
+            if (Store.travel || this.hit(this.position.x, this.position.y, this.props.damage)) {
+                return this.setState({burst: true});
+            }
         }
+        setTimeout(this.stay, 10);
     };
 
     view = () => <BulletBubble w={this.D} color={cst.bulletColor1}/>;

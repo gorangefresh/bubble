@@ -1,0 +1,25 @@
+.selection-menu {
+  position: absolute;
+  top: 40%;
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  height: 20%;
+  border-radius: 20px;
+  background: linear-gradient(0deg, rgba(4,97,201,0.8939950980392157) 0%, rgba(14,175,247,0.7063200280112045) 35%, rgba(0,185,255,0.5326505602240896) 100%);
+  z-index: 1000;
+
+  .select-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 50%;
+    font: 30px Bubble;
+    color: azure;
+  }
+}

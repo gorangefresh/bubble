@@ -4,7 +4,7 @@ import './Menu.scss';
 import Screen from "./Screen";
 
 function Menu() {
-    const [status = 'play', setStatus] = useState();
+    const [status, setStatus] = useState('menu');
 
     const changeStatus = () => {
         setStatus('play')

@@ -68,27 +68,28 @@ class Tank extends React.Component {
     };
 
     move = () => {
-        this.goUp();
-        this.goDown();
-        this.goLeft();
-        this.goRight();
-        if (this.tank.current) {
-            this.tank.current.style.left = `${Store.mainTank.x}px`;
-            this.tank.current.style.top = `${Store.mainTank.y}px`;
-            this.turn();
-        }
-
-        if (Store.touchEdge(Store.mainTank.x - Store.currentBasePosition.x, Store.mainTank.y - Store.currentBasePosition.y)) {
-            if (!Store.travel) {
-                return this.travel();
+        if (!Store.pause) {
+            this.goUp();
+            this.goDown();
+            this.goLeft();
+            this.goRight();
+            if (this.tank.current) {
+                this.tank.current.style.left = `${Store.mainTank.x}px`;
+                this.tank.current.style.top = `${Store.mainTank.y}px`;
+                this.turn();
             }
-        } else {
-            if (Store.travel) {
-                Store.travel = false;
-                this.travelBubble.current.style.display = 'none';
+
+            if (Store.touchEdge(Store.mainTank.x - Store.currentBasePosition.x, Store.mainTank.y - Store.currentBasePosition.y)) {
+                if (!Store.travel) {
+                    return this.travel();
+                }
+            } else {
+                if (Store.travel) {
+                    Store.travel = false;
+                    this.travelBubble.current.style.display = 'none';
+                }
             }
         }
-
         if (this.tank.current) setTimeout(this.move, 50);
     };
 
@@ -132,8 +133,10 @@ class Tank extends React.Component {
     };
 
     mouseMove = e => {
-        Store.setMouse(e);
-        this.turn();
+        if (!Store.pause) {
+            Store.setMouse(e);
+            this.turn();
+        }
     };
 
     turn = () => {
