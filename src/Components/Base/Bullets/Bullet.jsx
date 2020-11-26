@@ -8,17 +8,21 @@ class Bullet extends React.Component {
     D = 10;
 
     bullet = React.createRef();
-    position = {
-        x: this.props.coordinates.x - Store.currentBasePosition.x,
-        y: this.props.coordinates.y - Store.currentBasePosition.y
-    };
     speed = {x: 0, y: 0};
     hit = this.props.parent === 'hero' ? Store.hit : Store.enemyHit;
 
     constructor(props) {
         super(props);
 
-        this.state = {burst: false};
+        this.state = {
+            burst: false
+        };
+        this.position = {};
+
+        if (this.props.gunPosition && Store.currentBasePosition) {
+            this.position.x = props.gunPosition.x - Store.currentBasePosition.x;
+            this.position.y = props.gunPosition.y - Store.currentBasePosition.y;
+        }
     }
 
     componentDidMount() {
@@ -32,10 +36,10 @@ class Bullet extends React.Component {
     }
 
     getSpeed = target => {
-        const {tank} = this.props;
+        const {gunPosition} = this.props;
 
-        let a = target.x - tank.x;
-        let b = target.y - tank.y;
+        let a = target.x - gunPosition.x;
+        let b = target.y - gunPosition.y;
         let R = Math.sqrt(a ** 2 + b ** 2);
         this.speed.x = a * this.baseSpeed / R;
         this.speed.y = b * this.baseSpeed / R;
@@ -70,7 +74,7 @@ class Bullet extends React.Component {
         setTimeout(this.stay, 10);
     };
 
-    view = () => <BulletBubble w={this.D} color={cst.bulletColor1}/>;
+    view = () => <BulletBubble w={this.D} color={cst[this.props.parent + 'BulletColor1']}/>;
 
     render() {
         let content;

@@ -1,11 +1,11 @@
 import React from 'react';
-import Tank from "./Tank";
+import TankView from "./TankView";
 import RocketLauncher from '../Guns/RocketLauncher';
 import Bubble from "../Bubbles/Bubble";
 import cst from "../../../const";
 
 
-class Balanced2 extends Tank {
+class Balanced2 extends TankView {
     speed = 20;
     width  = 40;
 
@@ -19,8 +19,7 @@ class Balanced2 extends Tank {
             <Bubble left={-13} top={11} w={this.width / 3} color={cst.heroColor2}/>
             <Bubble left={0} top={20} w={this.width / 2} color={cst.heroColor2}/>
 
-            <RocketLauncher parent={this.type} position={{left: '0px', top: '5px'}}/>
-            {/*<BaseGun parent={this.type} position={{left: '10px', top: '0px'}}/>*/}
+            <RocketLauncher parent={this.type} offset={{x: 0, y: 5}} tank={this.props.tank}/>
         </>
     };
 }

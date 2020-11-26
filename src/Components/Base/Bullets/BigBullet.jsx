@@ -8,9 +8,7 @@ class BigBullet extends Bullet {
     D = 20;
 
     view = () => {
-        return <>
-            <BulletBubble w={this.D} color={cst.bulletColor2}/>
-            </>
+        return <BulletBubble w={this.D} color={cst[this.props.parent + 'BulletColor2']}/>
     }
 }
 

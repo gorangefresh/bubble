@@ -11,15 +11,15 @@ class Mine extends Bullet {
 
     view = () => {
         setTimeout(() => {this.hit = () => {return true} }, this.lifeTime);
-
+        let color = cst[this.props.parent + 'BulletColor3'];
         return <>
-            <BulletBubble w={this.D}/>
-            <BulletBubble w={5} top={-8} left={-6} color={cst.bulletColor3}/>
-            <BulletBubble w={5} top={0} left={-6} color={cst.bulletColor3}/>
-            <BulletBubble w={5} top={-8} left={6} color={cst.bulletColor3}/>
-            <BulletBubble w={5} top={0} left={6} color={cst.bulletColor3}/>
-            <BulletBubble w={5} top={-11} left={0} color={cst.bulletColor3}/>
-            <BulletBubble w={5} top={2} left={0} color={cst.bulletColor3}/>
+            <BulletBubble w={this.D} color={color}/>
+            <BulletBubble w={5} top={-8} left={-6} color={color}/>
+            <BulletBubble w={5} top={0} left={-6} color={color}/>
+            <BulletBubble w={5} top={-8} left={6} color={color}/>
+            <BulletBubble w={5} top={0} left={6} color={color}/>
+            <BulletBubble w={5} top={-11} left={0} color={color}/>
+            <BulletBubble w={5} top={2} left={0} color={color}/>
         </>
     };
 }

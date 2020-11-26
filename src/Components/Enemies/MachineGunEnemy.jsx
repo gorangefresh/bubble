@@ -15,7 +15,7 @@ class MachineGunEnemy extends Enemy {
             <Bubble left={0} top={-12} w={this.width / 1.5} color={cst.enemyColor1}/>
             <MachineGun
                 parent={this.type}
-                position={{left: '0px', top: '0px'}}
+                offset={{x: 0, y: 0}}
                 tank={this.tank}
             />
         </>

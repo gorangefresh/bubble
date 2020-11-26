@@ -1,5 +1,5 @@
 import React from 'react';
-import Bubble from '../Bubbles/GunBubble';
+import GunBubble from '../Bubbles/GunBubble';
 import Bullet from '../Bullets/Bullet';
 import Store from "../../Store";
 import cst from '../../../const.js';
@@ -25,12 +25,14 @@ class BaseGun extends React.Component {
             let id = Store.getId('bullet', this.props.parent);
 
             let target = {};
-            let cords = this.gun.current.getBoundingClientRect();
+            let gunPosition = this.gun.current.getBoundingClientRect();
+            let tankPosition = this.props.tank.current.getBoundingClientRect();
 
             if (this.props.angle) {
-                this.turn(target, cords);
+                this.turn(target, tankPosition, gunPosition);
             } else {
-                target = Store.mouse;
+                target.x = Store.mouse.x + gunPosition.x - tankPosition.x;
+                target.y = Store.mouse.y + gunPosition.y - tankPosition.y;
             }
 
             Store.bullets[id] = React.createElement(
@@ -39,8 +41,8 @@ class BaseGun extends React.Component {
                     parent: this.props.parent,
                     key: id,
                     id: id,
-                    coordinates: cords,
-                    tank: Store.mainTank,
+                    gunPosition,
+                    tankPosition,
                     damage: this.damage,
                     target: target,
                     angle: this.props.angle
@@ -52,15 +54,15 @@ class BaseGun extends React.Component {
         }
     };
 
-    turn = (target, cords) => {
+    turn = (target, tankPosition, gunPosition) => {
         if (!Store.pause) {
             let angle = Math.PI * this.props.angle / 180;
-            let x = Store.mouse.x - cords.x;
-            let y = Store.mouse.y - cords.y;
+            let x = Store.mouse.x - tankPosition.x;
+            let y = Store.mouse.y - tankPosition.y;
             target.x = x * Math.cos(angle) - y * Math.sin(angle);
             target.y = x * Math.sin(angle) + y * Math.cos(angle);
-            target.x += cords.x;
-            target.y += cords.y;
+            target.x += gunPosition.x;
+            target.y += gunPosition.y;
         }
     };
 
@@ -83,13 +85,15 @@ class BaseGun extends React.Component {
 
     view = () => {
         return <>
-            <Bubble color={cst.gunColor1} w={15} left={0} top={2}/>
-            <Bubble color={cst.gunColor1} w={10} left={0} top={-10}/>
+            <GunBubble color={cst.color5} w={15} left={0} top={2}/>
+            <GunBubble color={cst.color5} w={10} left={0} top={-10}/>
+            <GunBubble color={cst.heroBulletColor1} w={10} left={0} top={1}/>
         </>
     };
 
     render() {
-        let style = this.props.position;
+        let style = {left: `${this.props.offset.x}px`, top: `${this.props.offset.y}px`};
+
         if (this.props.angle) style.transform = `rotate(${this.props.angle}deg)`;
 
         return (

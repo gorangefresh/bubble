@@ -65,7 +65,7 @@ class MinerEnemy extends Enemy {
             <Bubble left={-15} top={20} w={this.width / 2} color={cst.enemyColor2}/>
             <Minelayer
                 parent={this.type}
-                position={{left: '0px', top: '15px'}}
+                offset={{x: 0, y: 15}}
                 tank={this.tank}/>
         </>
     };

@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseBubble from './Base/Bubbles/BaseBubble';
 import Store from './Store';
+import cst from "../const";
 import BulletsPlace from "./BulletsPlace";
 
 class Playground extends React.Component {
@@ -105,7 +106,7 @@ class Playground extends React.Component {
 
             return (
                 <div id={x + '-' + y} className={'playground'} ref={this.base} style={styles}>
-                    <BaseBubble color={'#FFFFFF'} w={Store.baseD}/>
+                    <BaseBubble color={cst.color1} w={Store.baseD}/>
                     {place}
                 </div>
             );

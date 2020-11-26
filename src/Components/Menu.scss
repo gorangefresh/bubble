@@ -3,7 +3,15 @@
     font: 90px Bubble;
     font-style: normal;
     font-weight: normal;
-    color: azure;
+    color: #1f615f;
     cursor: pointer;
     user-select: none;
+    //text-shadow: 0px 0px 5px rgba(7,41,40,1);
+
+    &:hover {
+        color: lighten(#1f615f, 2%);
+    }
+    &:active {
+        text-shadow: 0px 0px 0px #072928;
+    }
 }

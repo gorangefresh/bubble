@@ -92,7 +92,7 @@ const levels = [
     }
 ];
 
-const lvl = {0: 0, 1: 5, 2: 30, 3: 100, 4: 250, 5: 500};
+const lvl = {0: 0, 1: 5, 2: 10, 3: 20, 4: 30, 5: 40};
 
 class Store {
     // Пауза
@@ -112,12 +112,13 @@ class Store {
         y: 0,
         exp: 0,
         lvl: 0,
-        R: 25
+        R: 25,
+        angle: 0
     };
 
-    tankClass = 'light';
+    upgradeTree = {0: 'light'};
 
-    // Координаты текущего уровня
+    // Позиция на миникарте текущего уровня
     y = 0;
     x = 0;
 
@@ -278,7 +279,7 @@ class Store {
             let x = this.mainTank.x - this.currentBasePosition.x;
             let y = this.mainTank.y - this.currentBasePosition.y;
             let a;
-            if (+Math.abs(x) > +Math.abs(y)) {
+            if (+Math.abs(x) >= +Math.abs(y)) {
                 if (x > 0) {
                     if (this.y !== this.matrixLength) {
                         this.y = this.y + 1;
@@ -329,10 +330,14 @@ class Store {
                 if (this.mainTank.lvl !== +i - 1) {
                     this.mainTank.lvl = +i - 1;
 
-                    this.pause = true;
-                    this.select(true);
+                    if (!this.upgradeTree[this.mainTank.lvl]) {
+                        this.pause = true;
+                        this.select(true);
 
-                    await this.selectMenu();
+                        this.setExp(100);
+
+                        await this.selectMenu();
+                    }
 
                     this.upgrade(this.mainTank.lvl);
                 }
@@ -367,7 +372,7 @@ class Store {
     };
 
     changeClass = newClass => {
-        this.tankClass = newClass;
+        this.upgradeTree[this.mainTank.lvl] = newClass;
         this.select(false);
         this.pause = false;
     }

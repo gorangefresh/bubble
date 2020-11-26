@@ -1,12 +1,12 @@
 import React from 'react';
-import Tank from "./Tank";
+import TankView from "./TankView";
 import HeavyGun from '../Guns/HeavyGun';
 import Bubble from "../Bubbles/Bubble";
 import cst from "../../../const";
 import Minelayer from "../../Enemies/Guns/Minelayer";
 
 
-class Heavy3 extends Tank {
+class Heavy3 extends TankView {
     speed = 12;
     width  = 55;
 
@@ -21,9 +21,9 @@ class Heavy3 extends Tank {
             {/*<Bubble left={-5} top={20} w={this.width / 4} color={cst.heroColor2}/>*/}
 
             <Bubble left={0} top={-7} w={this.width / 1.5} color={cst.heroColor2}/>
-            <HeavyGun parent={this.type} position={{left: '-15px', top: '-5px'}}/>
-            <HeavyGun parent={this.type} position={{left: '15px', top: '-5px'}}/>
-            <Minelayer parent={this.type} position={{left: '0px', top: '28px'}}/>
+            <HeavyGun parent={this.type} offset={{x:-15, y:-5}} tank={this.props.tank}/>
+            <HeavyGun parent={this.type} offset={{x:15, y:-5}} tank={this.props.tank}/>
+            <Minelayer parent={this.type} offset={{x:0, y:28}} tank={this.props.tank}/>
         </>
     };
 }

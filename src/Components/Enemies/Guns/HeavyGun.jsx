@@ -11,8 +11,8 @@ class HeavyGun extends Gun {
 
     view = () => {
         return <>
-            <Bubble color={cst.gunColor1} w={30} left={0} top={2}/>
-            <Bubble color={cst.gunColor1} w={20} left={0} top={-12}/>
+            <Bubble color={cst.orange} w={30} left={0} top={2}/>
+            <Bubble color={cst.orange} w={20} left={0} top={-12}/>
         </>
     };
 }

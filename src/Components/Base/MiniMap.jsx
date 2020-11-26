@@ -2,8 +2,8 @@ import React from 'react';
 import MapBubble from './Bubbles/MapBubble';
 
 import './MiniMap.scss';
-const baseColor = '#FFFFFF';
-const currentColor = '#3247CB';
+const baseColor = '#d4f4f0';
+const currentColor = '#0c3e3e';
 const width = 300;
 const padding = 5;
 

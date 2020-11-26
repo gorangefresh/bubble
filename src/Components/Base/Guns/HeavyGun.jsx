@@ -11,9 +11,10 @@ class MachineGun extends BaseGun {
 
     view = () => {
         return <>
-            <Bubble color={cst.gunColor1} w={20} left={0} top={10}/>
-            <Bubble color={cst.gunColor1} w={10} left={10} top={-3}/>
-            <Bubble color={cst.gunColor1} w={10} left={-10} top={-3}/>
+            <Bubble color={cst.color5} w={20} left={0} top={10}/>
+            <Bubble color={cst.pink} w={15} left={0} top={10}/>
+            <Bubble color={cst.color5} w={10} left={10} top={-3}/>
+            <Bubble color={cst.color5} w={10} left={-10} top={-3}/>
         </>
     };
 

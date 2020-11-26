@@ -7,7 +7,7 @@ function Menu() {
     const [status, setStatus] = useState('menu');
 
     const changeStatus = () => {
-        setStatus('play')
+        setTimeout(() => setStatus('play'), 100)
     };
 
     if (status === 'menu') {

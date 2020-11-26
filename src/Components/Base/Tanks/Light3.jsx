@@ -1,28 +1,28 @@
 import React from 'react';
-import Tank from "./Tank";
+import TankView from "./TankView";
 import HeavyMachineGun from '../Guns/HeavyMachineGun';
 import Bubble from "../Bubbles/Bubble";
 import cst from "../../../const";
 
 
-class Light3 extends Tank {
+class Light3 extends TankView {
     speed = 25;
-    width  = 50;
+    width  = 40;
 
     view = () => {
         return <>
-            <Bubble left={12} top={7} w={this.width / 2} color={cst.heroColor2}/>
-            <Bubble left={-12} top={7} w={this.width / 2} color={cst.heroColor2}/>
-            <Bubble left={0} top={-12} w={this.width / 2} color={cst.heroColor2}/>
+            <Bubble left={12}  top={7}   w={25} color={cst.heroColor2}/>
+            <Bubble left={-12} top={7}   w={25} color={cst.heroColor2}/>
+            <Bubble left={0}   top={-12} w={25} color={cst.heroColor2}/>
 
-            <Bubble left={28} top={9} w={this.width / 4} color={cst.heroColor1}/>
-            <Bubble left={-28} top={9} w={this.width / 4} color={cst.heroColor1}/>
-            <Bubble left={-26} top={15} w={this.width / 4} color={cst.heroColor1}/>
-            <Bubble left={26} top={15} w={this.width / 4} color={cst.heroColor1}/>
+            <Bubble left={24}  top={9}  w={10} color={cst.color5}/>
+            <Bubble left={-24} top={9}  w={10} color={cst.color5}/>
+            <Bubble left={-22} top={15} w={10} color={cst.color5}/>
+            <Bubble left={22}  top={15} w={10} color={cst.color5}/>
+            <Bubble left={-12} top={15} w={10} color={cst.color5}/>
+            <Bubble left={12}  top={15} w={10} color={cst.color5}/>
 
-            <Bubble left={18} top={-10} w={this.width / 4} color={cst.heroColor1}/>
-            <Bubble left={-18} top={-10} w={this.width / 4} color={cst.heroColor1}/>
-            <HeavyMachineGun parent={this.type} position={{left: '0px', top: '-10px'}}/>
+            <HeavyMachineGun parent={this.type} offset={{x:0, y:-10}} tank={this.props.tank}/>
         </>
     };
 }

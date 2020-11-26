@@ -1,17 +1,29 @@
 import React from 'react';
-import Bubble from '../Bubbles/Bubble';
-import BaseGun from '../Guns/BaseGun';
 import Store from "../../Store";
 import HighOpacity from "../Gradients/OpacityGradients/HighOpacity";
 import cst from "../../../const";
+import Light1 from "./Light1";
+import Light2 from "./Light2";
+import Light3 from "./Light3";
+import Balanced1 from "./Balanced1";
+import Balanced2 from "./Balanced2";
+import Balanced3 from "./Balanced3";
+import Heavy1 from "./Heavy1";
+import Heavy2 from "./Heavy2";
+import Heavy3 from "./Heavy3";
+import Destroyer from "./Destroyer";
+import BaseTank from "./BaseTank";
+
+
+const Tanks = {
+    0: {light: BaseTank},
+    1: {light: Light1, heavy: Heavy1, balanced: Balanced1},
+    2: {light: Light2, heavy: Heavy2, balanced: Balanced2},
+    3: {light: Light3, heavy: Heavy3, balanced: Balanced3},
+    4: {light: Destroyer, heavy: Destroyer, balanced: Destroyer},
+};
 
 class Tank extends React.Component {
-    speed = 20;
-    width = 40;
-    mainColor = '#234ecd';
-
-    type = 'hero';
-    halfSpeed = this.speed * .66;
     pressed = {};
 
     constructor(props) {
@@ -19,8 +31,10 @@ class Tank extends React.Component {
 
         this.tank = React.createRef();
         this.travelBubble = React.createRef();
-        Store.mainTank.R = this.width / 2;
-        Store.tankD = this.width;
+
+        this.state = { lvl: 0 };
+        Store.upgrade = (lvl) => this.setState({lvl});
+
         if (!Store.mainTank.x) this.setPosition();
     }
 
@@ -96,18 +110,18 @@ class Tank extends React.Component {
     goUp = () => {
         if (this.pressed['KeyW'] && !this.pressed['KeyS']) {
             if (this.pressed['KeyA'] || this.pressed['KeyD']) {
-                Store.mainTank.y = Store.mainTank.y - this.halfSpeed;
+                Store.mainTank.y = Store.mainTank.y - Store.mainTank.halfSpeed;
             } else {
-                Store.mainTank.y = Store.mainTank.y - this.speed;
+                Store.mainTank.y = Store.mainTank.y - Store.mainTank.speed;
             }
         }
     };
     goDown = () => {
         if (this.pressed['KeyS'] && !this.pressed['KeyW']) {
             if (this.pressed['KeyA'] || this.pressed['KeyD']) {
-                Store.mainTank.y = Store.mainTank.y + this.halfSpeed;
+                Store.mainTank.y = Store.mainTank.y + Store.mainTank.halfSpeed;
             } else {
-                Store.mainTank.y = Store.mainTank.y + this.speed;
+                Store.mainTank.y = Store.mainTank.y + Store.mainTank.speed;
             }
         }
 
@@ -115,9 +129,9 @@ class Tank extends React.Component {
     goLeft = () => {
         if (this.pressed['KeyA'] && !this.pressed['KeyD']) {
             if (this.pressed['KeyS'] || this.pressed['KeyW']) {
-                Store.mainTank.x = Store.mainTank.x - this.halfSpeed;
+                Store.mainTank.x = Store.mainTank.x - Store.mainTank.halfSpeed;
             } else {
-                Store.mainTank.x = Store.mainTank.x - this.speed;
+                Store.mainTank.x = Store.mainTank.x - Store.mainTank.speed;
             }
         }
 
@@ -125,9 +139,9 @@ class Tank extends React.Component {
     goRight = () => {
         if (this.pressed['KeyD'] && !this.pressed['KeyA']) {
             if (this.pressed['KeyS'] || this.pressed['KeyW']) {
-                Store.mainTank.x = Store.mainTank.x + this.halfSpeed;
+                Store.mainTank.x = Store.mainTank.x + Store.mainTank.halfSpeed;
             } else {
-                Store.mainTank.x = Store.mainTank.x + this.speed;
+                Store.mainTank.x = Store.mainTank.x + Store.mainTank.speed;
             }
         }
     };
@@ -141,33 +155,30 @@ class Tank extends React.Component {
 
     turn = () => {
         const getAngle = (center, point) => {
-            return 180 * Math.atan2(point.y - center.y, point.x - center.x) / Math.PI + 90;
+            return 180 * Math.atan2(point.y - center.y, point.x - center.x) / Math.PI;
         };
 
-        let angle = getAngle(Store.mainTank, Store.mouse);
-        if (this.tank.current) this.tank.current.style.transform = `rotate(${angle}deg)`;
-    };
-
-    view = () => {
-        return <>
-            <Bubble left={-9} top={6} w={this.width / 3} color={this.mainColor}/>
-            <Bubble left={9} top={6} w={this.width / 3} color={this.mainColor}/>
-            <Bubble left={0} top={9} w={this.width / 3} color={this.mainColor}/>
-            <Bubble left={0} top={-5} w={this.width / 2} color={this.mainColor}/>
-            <BaseGun parent={this.type} position={{left: '0px', top: '-6px'}}/>
-        </>
+        Store.mainTank.angle = getAngle(Store.mainTank, Store.mouse);
+        if (this.tank.current) this.tank.current.style.transform = `rotate(${Store.mainTank.angle + 90}deg)`;
     };
 
     render() {
+        let view = React.createElement(
+            Tanks[this.state.lvl][Store.upgradeTree[this.state.lvl]],
+            {
+                tank: this.tank,
+            }
+        );
+
         return (
             <div className={'tank-wrap'} ref={this.tank}>
                 <div className={'bubble-wrap'} style={{display: 'none'}} ref={this.travelBubble}>
-                    <svg id={'travel'} viewBox={`0 0 ${this.width * 2} ${this.width * 2}`}
-                         style={{width: `${this.width * 2}px`, height: `${this.width * 2}px`}}>
-                        <HighOpacity color={cst.travelColor} w={this.width * 2}/>
+                    <svg id={'travel'} viewBox={`0 0 ${Store.tankD * 2} ${Store.tankD * 2}`}
+                         style={{width: `${Store.tankD * 2}px`, height: `${Store.tankD * 2}px`}}>
+                        <HighOpacity color={cst.travelColor} w={Store.tankD * 2}/>
                     </svg>
                 </div>
-                {this.view()}
+                {view}
             </div>
         );
     }

@@ -5,8 +5,8 @@
     width: 600px;
     border-radius: 10px;
     height: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    background: rgba(61, 155, 230, 0.71);
+    box-shadow: 0 0 6px #0c3e3e;
+    background: #88c4be;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,11 +16,15 @@
         border-radius: 5px;
         width: 95%;
         height: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 0 3px #1f615f;
+        border: 1px solid #1f615f;
+        background: #d4f4f0;
 
         .inner-stripe {
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 0 3px #1f615f;
+            background-color: #1f615f;
+            transition: width .3s ease;
         }
     }
 }

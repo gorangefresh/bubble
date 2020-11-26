@@ -14,7 +14,7 @@ class LightEnemy extends Enemy {
             <Bubble w={this.width} color={cst.enemyColor1}/>
             <Gun
                 parent={this.type}
-                position={{left: '0px', top: '0px'}}
+                offset={{x: 0, y: 0}}
                 tank={this.tank}
             />
         </>
