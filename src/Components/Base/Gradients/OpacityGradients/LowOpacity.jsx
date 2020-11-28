@@ -25,8 +25,9 @@ function LowOpacity(props) {
             </defs>
 
             <circle
+                className={props.className}
                 r="50%" cx="50%" cy="50%"
-                fill={color}
+                // fill={color}
                 mask={`url(#mask--low-${color}-${w ? w : ''})`}
             >
             </circle>

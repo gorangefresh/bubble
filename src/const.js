@@ -8,9 +8,9 @@ const cst = {
 
     heroColor2: '#1f615f',
 
-    enemyBulletColor1: '#530900',
-    enemyBulletColor2: '#530c00',
-    enemyBulletColor3: '#53000c',
+    enemyBulletColor1: '#191a3a',
+    enemyBulletColor2: '#1b1c3e',
+    enemyBulletColor3: '#1a1b3b',
 
     heroBulletColor1: '#ff7d8d',
     heroBulletColor2: '#ff7d8d',

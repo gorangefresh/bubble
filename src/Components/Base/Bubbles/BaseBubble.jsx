@@ -7,7 +7,7 @@ function BaseBubble(props) {
 
     return (
         <div className={'base-bubble-wrap'}>
-            <svg viewBox={viewBox} style={{width: `${w}px`, height: `${h ? h : w}px`}}>
+            <svg viewBox={viewBox} style={{width: `${w}px`, height: `${h ? h : w}px`, fill: color}}>
                 <HighOpacity color={color} w={w}/>
             </svg>
         </div>

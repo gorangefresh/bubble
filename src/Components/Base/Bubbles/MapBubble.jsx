@@ -12,7 +12,7 @@ function MapBubble(props) {
 
     return (
         <div className={'map-bubble'} style={{width: `${w}px`, height: `${w}px`}}>
-            <svg viewBox={viewBox} style={{width: `${bubbleWidth}px`, height: `${bubbleWidth}px`}}>
+            <svg viewBox={viewBox} style={{width: `${bubbleWidth}px`, height: `${bubbleWidth}px`, fill: color}}>
                 {gradient}
                 <Edge color={color} w={w}/>
             </svg>

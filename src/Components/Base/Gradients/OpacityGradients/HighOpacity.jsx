@@ -27,9 +27,10 @@ function HighOpacity(props) {
 
             </defs>
 
-            <circle r="50%" cx="50%" cy="50%"
-                    fill={color}
-                    mask={`url(#mask--high-${color}-${w ? w : ''})`}>
+            <circle
+                r="50%" cx="50%" cy="50%"
+                mask={`url(#mask--high-${color}-${w ? w : ''})`}
+            >
             </circle>
 
         </>

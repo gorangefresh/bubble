@@ -67,11 +67,6 @@ body {
   position: absolute;
 }
 
-.bullet-wrap {
-  position: absolute;
-  box-sizing: content-box;
-}
-
 .anim-run {
     transition: all 0.5s ease;
     animation: run .5s linear infinite;

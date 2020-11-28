@@ -1,5 +1,6 @@
 import React from 'react';
 import GunBubble from '../Bubbles/GunBubble';
+import Sounds from '../../Sounds/Sounds';
 import Bullet from '../Bullets/Bullet';
 import Store from "../../Store";
 import cst from '../../../const.js';
@@ -35,6 +36,7 @@ class BaseGun extends React.Component {
                 target.y = Store.mouse.y + gunPosition.y - tankPosition.y;
             }
 
+            Sounds.shoot();
             Store.bullets[id] = React.createElement(
                 this.bullet,
                 {

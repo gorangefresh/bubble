@@ -3,6 +3,8 @@ import BulletBubble from "../Bubbles/BulletBubble";
 import Store from "../../Store";
 import cst from '../../../const.js';
 
+import './Bullets.scss';
+
 class Bullet extends React.Component {
     baseSpeed = 6;
     D = 10;
@@ -71,7 +73,7 @@ class Bullet extends React.Component {
                 return this.setState({burst: true});
             }
         }
-        setTimeout(this.stay, 10);
+        setTimeout(this.stay, 50);
     };
 
     view = () => <BulletBubble w={this.D} color={cst[this.props.parent + 'BulletColor1']}/>;

@@ -24,9 +24,10 @@ function Edge(props) {
                 </mask>
             </defs>
 
-            <circle r="50%" cx="50%" cy="50%"
-                    fill={color}
-                    mask={`url(#mask--edge-${color}-${w ? w : ''})`}>
+            <circle
+                r="50%" cx="50%" cy="50%"
+                mask={`url(#mask--edge-${color}-${w ? w : ''})`}
+            >
             </circle>
         </>
     );

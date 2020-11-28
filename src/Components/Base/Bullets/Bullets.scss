@@ -1,0 +1,21 @@
+.bullet-wrap {
+  position: absolute;
+  box-sizing: content-box;
+}
+
+.mine-bubble svg{
+    transition: all 0.5s ease;
+    animation: blink 2s ease infinite;
+
+  @keyframes blink {
+    0% {
+
+    }
+    50% {
+      fill: #c62735;
+    }
+    100% {
+
+    }
+  }
+}
