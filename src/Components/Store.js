@@ -35,29 +35,29 @@ const levels = [
     {
         'level': 7,
         enemies: {
-            'lightEnemy': 4,
-            'plainEnemy': 2
+            'machineGunEnemy': 2,
+            'heavyEnemy': 4,
         },
     },
     {
         'level': 6,
         enemies: {
-            'lightEnemy': 4,
-            'plainEnemy': 2
+            'machineGunEnemy': 1,
+            'lightEnemy': 2,
+            'heavyEnemy': 4,
         },
     },
     {
         'level': 5,
         enemies: {
             'lightEnemy': 4,
-            'plainEnemy': 2
+            'heavyEnemy': 2,
         },
     },
     {
         'level': 4,
         enemies: {
             'machineGunEnemy': 1,
-            'minerEnemy': 2,
             'plainEnemy': 3
         },
     },
@@ -92,7 +92,7 @@ const levels = [
     }
 ];
 
-const lvl = {0: 0, 1: 5, 2: 10, 3: 20, 4: 30, 5: 40};
+const lvl = {0: 0, 1: 5, 2: 20, 3: 40, 4: 70, 5: 110};
 
 class Store {
     // Пауза
@@ -260,7 +260,9 @@ class Store {
 
         this.matrix = m;
         this.x = +a - 1;
+        this.startX = this.x;
         this.y = +a - 1;
+        this.startY = this.y;
         this.current = this.matrix[`${this.x}-${this.y}`];
     };
 

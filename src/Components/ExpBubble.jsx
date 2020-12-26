@@ -1,12 +1,11 @@
 import React from 'react';
-import BulletBubble from "../Bubbles/BulletBubble";
-import Store from "../../Store";
-import cst from '../../../const.js';
-import Bullet from "./Bullet";
+import BulletBubble from "./Base/Bubbles/BulletBubble";
+import Store from "./Store";
+import cst from '../const.js';
 
-class BulletHunter extends Bullet {
-    baseSpeed = 9;
-    D = 15;
+class ExpBubble extends React.Component {
+    baseSpeed = 25;
+    D = 5;
     capture = false;
 
     setStart = () => {
@@ -98,12 +97,9 @@ class BulletHunter extends Bullet {
 
     view = () => {
         return <>
-            <BulletBubble w={this.D} color={cst.rocketColor} top={2} left={0}/>
-            <BulletBubble w={this.D / 1.2} color={cst.rocketColor} top={-4} left={0}/>
-            <BulletBubble w={this.D / 2} color={cst.rocketColor} top={6} left={4}/>
-            <BulletBubble w={this.D / 2} color={cst.rocketColor} top={6} left={-4}/>
+            <BulletBubble w={this.D} color={cst.blue} top={0} left={0}/>
         </>;
     }
 }
 
-export default BulletHunter;
+export default ExpBubble;

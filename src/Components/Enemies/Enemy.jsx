@@ -7,7 +7,7 @@ import cst from '../../const';
 /** Универсальный класс компонента противника
  *
  * БАЗОВЫЕ НАСТРОЙКИ
- * baseSpeed = 2; // 1 = 100 px/s
+ * baseSpeed = 2; //
  * width = 40; // px
  * trajectoryChangeRate = 5000; // ms
  *
@@ -16,7 +16,7 @@ import cst from '../../const';
  */
 
 class Enemy extends React.Component {
-    baseSpeed = 2;
+    baseSpeed = 6;
     width = 40;
     trajectoryChangeRate = 5000;
 
@@ -73,7 +73,7 @@ class Enemy extends React.Component {
                     this.getSpeed(true);
                 }
             }
-            if (this.tank.current) setTimeout(this.move, 10);
+            if (this.tank.current) setTimeout(this.move, 30);
         }
     };
 

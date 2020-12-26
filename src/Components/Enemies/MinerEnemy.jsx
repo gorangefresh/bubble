@@ -6,7 +6,7 @@ import Store from "../Store";
 import Minelayer from "./Guns/Minelayer";
 
 class MinerEnemy extends Enemy {
-    baseSpeed = 1.5;
+    baseSpeed = 4.5;
     width = 40;
 
     turn = () => {
@@ -36,7 +36,7 @@ class MinerEnemy extends Enemy {
                     this.getSpeed(true);
                 }
             }
-            if (this.tank.current) setTimeout(this.move, 10);
+            if (this.tank.current) setTimeout(this.move, 30);
         }
     };
 

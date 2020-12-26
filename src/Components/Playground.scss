@@ -1,0 +1,40 @@
+.playground {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    transition: all .7s linear;
+}
+
+.level-description {
+    text-align: center;
+    z-index: -1;
+    position: absolute;
+    top: 15%;
+    font: 35px Bubble;
+    line-height: 50px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+
+    color: lighten(#1f615f, 15%);
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 70%;
+    width: 70%;
+
+
+    .text-wasd {
+        display: inline-block;
+        text-align: center;
+        line-height: 25px;
+        -webkit-text-stroke: 2px lighten(#1f615f, 10%);
+        color: rgba(31, 97, 95, 0);
+        vertical-align: bottom;
+    }
+}

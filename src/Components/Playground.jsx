@@ -3,6 +3,8 @@ import BaseBubble from './Base/Bubbles/BaseBubble';
 import Store from './Store';
 import cst from "../const";
 import BulletsPlace from "./BulletsPlace";
+import Description from "./Description";
+import './Playground.scss';
 
 class Playground extends React.Component {
     constructor(props) {
@@ -102,10 +104,22 @@ class Playground extends React.Component {
             };
 
             let place;
+            let description;
             if (this.position === 'center') place = <BulletsPlace/>;
+            if (+x === Store.startX && +y === Store.startY) {
+                description = <Description center={true}/>;
+            } else if (
+                +x === Store.startX + 1 && +y === Store.startY ||
+                +x === Store.startX - 1 && +y === Store.startY ||
+                +y === Store.startY + 1 && +x === Store.startX ||
+                +y === Store.startY - 1 && +x === Store.startX
+            ) {
+                description = <Description center={false}/>;
+            }
 
             return (
                 <div id={x + '-' + y} className={'playground'} ref={this.base} style={styles}>
+                    {description}
                     <BaseBubble color={cst.color1} w={Store.baseD}/>
                     {place}
                 </div>

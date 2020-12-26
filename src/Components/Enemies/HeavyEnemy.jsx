@@ -5,7 +5,7 @@ import cst from '../../const';
 import HeavyGun from "./Guns/HeavyGun";
 
 class HeavyEnemy extends Enemy {
-    baseSpeed = 1;
+    baseSpeed = 3;
     width = 60;
 
     view = () => {

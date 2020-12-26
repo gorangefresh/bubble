@@ -6,7 +6,7 @@ import cst from '../../../const.js';
 import './Bullets.scss';
 
 class Bullet extends React.Component {
-    baseSpeed = 6;
+    baseSpeed = 18;
     D = 10;
 
     bullet = React.createRef();
@@ -64,7 +64,7 @@ class Bullet extends React.Component {
                 return this.setState({burst: true});
             }
         }
-        setTimeout(this.move, 10);
+        setTimeout(this.move, 30);
     };
 
     stay = () => {

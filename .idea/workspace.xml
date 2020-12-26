@@ -2,25 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9770ec1e-4a5b-411d-baa1-7b13e31e64a7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Components/Description.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/ExpBubble.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Playground.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/Bubbles/BaseBubble.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Bubbles/BaseBubble.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/Bubbles/Bubble.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Bubbles/Bubble.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/Bubbles/BulletBubble.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Bubbles/BulletBubble.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/Bubbles/GunBubble.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Bubbles/GunBubble.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/Bubbles/MapBubble.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Bubbles/MapBubble.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Base/Bullets/BigBullet.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Bullets/BigBullet.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Base/Bullets/Bullet.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Bullets/Bullet.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/Bullets/Mine.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Bullets/Mine.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/Edge.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/Edge.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/HighOpacity.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/HighOpacity.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/LowOpacity.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/LowOpacity.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/MediumOpacity.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/MediumOpacity.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/Guns/BaseGun.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Guns/BaseGun.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/SelectionMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/SelectionMenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Base/SelectionMenu.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/SelectionMenu.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/const.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/const.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Base/Bullets/BulletHunter.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Base/Bullets/BulletHunter.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Enemies/Enemy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Enemies/Enemy.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Enemies/HeavyEnemy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Enemies/HeavyEnemy.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Enemies/LightEnemy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Enemies/LightEnemy.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Enemies/MachineGunEnemy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Enemies/MachineGunEnemy.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Enemies/MinerEnemy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Enemies/MinerEnemy.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Enemies/PlainEnemy.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Enemies/PlainEnemy.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Playground.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Playground.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Store.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,11 +30,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Base/Guns/BaseGun.jsx">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Components/Store.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="38" column="26" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
+            <state relative-caret-position="68">
+              <caret line="94" column="54" lean-forward="true" selection-start-line="94" selection-start-column="54" selection-end-line="94" selection-end-column="54" />
+              <folding>
+                <element signature="e#16#525#0" />
+                <element signature="e#543#1568#0" />
+                <element signature="e#3178#3338#0" />
+                <element signature="e#3371#3442#0" />
+                <element signature="e#3473#3997#0" />
+                <element signature="e#4033#4343#0" />
+                <element signature="e#4369#4787#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/Mine.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="60" lean-forward="true" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -46,10 +61,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Base/Tanks/Tank.jsx">
+        <entry file="file://$PROJECT_DIR$/src/Components/ExpBubble.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+            <state relative-caret-position="-672">
+              <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -58,10 +73,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/const.js">
+        <entry file="file://$PROJECT_DIR$/src/Components/Enemies/Enemy.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="18" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="20" />
+            <state relative-caret-position="255">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -69,8 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/BulletHunter.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+            <state relative-caret-position="187">
+              <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -79,10 +97,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Base/SelectionMenu.jsx">
+        <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/Bullet.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
+            <state relative-caret-position="510">
+              <caret line="75" column="34" lean-forward="true" selection-start-line="75" selection-start-column="34" selection-end-line="75" selection-end-column="34" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -91,58 +109,51 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Base/SelectionMenu.scss">
+        <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/Bullets.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
+            <state relative-caret-position="136">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Store.js">
+        <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/BigBullet.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="187">
+              <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Description.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
               <folding>
-                <element signature="e#16#525#0" />
-                <element signature="e#543#1568#0" />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Components/Sounds/Sounds.jsx">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Playground.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+            <state relative-caret-position="1802">
+              <caret line="106" column="19" selection-start-line="106" selection-start-column="19" selection-end-line="106" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/style.css">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>orange</find>
-      <find>GunBubble</find>
-      <find>color3</find>
-      <find>yellow</find>
-      <find>color4</find>
-      <find>setExp</find>
-      <find>getSpeed</find>
-      <find>coordinates</find>
-      <find>mainTank.R</find>
       <find>coor</find>
       <find>coo</find>
       <find>border</find>
@@ -164,6 +175,15 @@
       <find>speed</find>
       <find>bullet-wrap</find>
       <find>icon.</find>
+      <find>currentBasePosition</find>
+      <find>this.x</find>
+      <find>lighte</find>
+      <find>setTim</find>
+      <find>baseSpeed</find>
+      <find>baseSpeed =</find>
+      <find>setTimeout(</find>
+      <find>mine-bubble</find>
+      <find>ExpBubble</find>
     </findStrings>
     <replaceStrings>
       <replace>stopColor</replace>
@@ -204,11 +224,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Components/Base/MiniMap.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Base/MiniMap.scss" />
-        <option value="$PROJECT_DIR$/src/Components/Base/ExperienceBar.scss" />
-        <option value="$PROJECT_DIR$/src/Components/Base/Guns/MachineGun.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Base/Guns/HeavyMachineGun.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Guns/RocketLauncher.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Menu.scss" />
         <option value="$PROJECT_DIR$/src/App.jsx" />
@@ -220,20 +235,13 @@
         <option value="$PROJECT_DIR$/src/Components/Base/Tanks/Heavy3.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Tanks/Light3.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Tanks/Light2.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Enemies/Enemy.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Enemies/HeavyEnemy.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Enemies/LightEnemy.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Enemies/MachineGunEnemy.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Base/Bullets/BigBullet.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Enemies/Guns/Gun.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Screen.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Tanks/BaseTank.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Enemies/MinerEnemy.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Tanks/Destroyer.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Tanks/TankView.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Tanks/Balanced2.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Tanks/Balanced3.jsx" />
-        <option value="$PROJECT_DIR$/src/App.scss" />
         <option value="$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/LowOpacity.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Bubbles/BulletBubble.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Bubbles/BaseBubble.jsx" />
@@ -243,23 +251,36 @@
         <option value="$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/HighOpacity.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/MediumOpacity.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Bubbles/GunBubble.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Base/Bullets/Bullet.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/Bullets/Mine.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Base/Bullets/Bullets.scss" />
         <option value="$PROJECT_DIR$/src/const.js" />
         <option value="$PROJECT_DIR$/src/Components/Base/Tanks/Tank.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Base/SelectionMenu.scss" />
         <option value="$PROJECT_DIR$/src/Components/Base/SelectionMenu.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Base/Bullets/BulletHunter.jsx" />
-        <option value="$PROJECT_DIR$/src/Components/Store.js" />
         <option value="$PROJECT_DIR$/public/style.css" />
         <option value="$PROJECT_DIR$/src/Components/Base/Guns/BaseGun.jsx" />
         <option value="$PROJECT_DIR$/src/Components/Sounds/Sounds.jsx" />
+        <option value="$PROJECT_DIR$/src/App.scss" />
+        <option value="$PROJECT_DIR$/src/Components/Playground.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Playground.scss" />
+        <option value="$PROJECT_DIR$/src/Components/Description.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Enemies/LightEnemy.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Enemies/PlainEnemy.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Enemies/HeavyEnemy.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Enemies/MachineGunEnemy.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Base/Bullets/Bullet.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Base/Bullets/BulletHunter.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Enemies/Enemy.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Base/Bullets/BigBullet.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/ExpBubble.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Enemies/MinerEnemy.jsx" />
+        <option value="$PROJECT_DIR$/src/Components/Base/Bullets/Bullets.scss" />
+        <option value="$PROJECT_DIR$/src/Components/Store.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="138" />
+    <option name="x" value="67" />
+    <option name="y" value="57" />
     <option name="width" value="1206" />
     <option name="height" value="943" />
   </component>
@@ -269,6 +290,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -297,38 +319,40 @@
               <item name="Bubble" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="Base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="Base" type="462c0819:PsiDirectoryNode" />
+              <item name="Bullets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="Enemies" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bubble" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Bubble" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
               <item name="Sounds" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Bubble" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Bubble" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="fonts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="Z:/vim_front" />
+    <property name="last_opened_file_path" value="C:/Downloads/aster" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -424,12 +448,16 @@
       <workItem from="1604996736876" duration="28000" />
       <workItem from="1606396825664" duration="11531000" />
       <workItem from="1606473343189" duration="52000" />
-      <workItem from="1606554623711" duration="2097000" />
+      <workItem from="1606554623711" duration="10537000" />
+      <workItem from="1606728462104" duration="7000" />
+      <workItem from="1606938733186" duration="138000" />
+      <workItem from="1606984647644" duration="41000" />
+      <workItem from="1608975693177" duration="3066000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="418061000" />
+    <option name="totallyTimeSpent" value="429753000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -444,7 +472,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.19989339" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49919224" visible="true" weight="0.20842217" />
       <window_info id="Structure" order="1" sideWeight="0.5007072" side_tool="true" weight="0.108742006" />
       <window_info id="Favorites" order="2" sideWeight="0.50080776" side_tool="true" weight="0.108742006" />
       <window_info id="npm" order="3" side_tool="true" />
@@ -470,80 +498,10 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/BigBullet.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Enemies/Guns/Gun.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Base/ExperienceBar.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="61" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Enemies/MinerEnemy.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="67" column="38" lean-forward="true" selection-start-line="67" selection-start-column="38" selection-end-line="68" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Enemies/MachineGunEnemy.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Enemies/LightEnemy.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Enemies/PlainEnemy.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Enemies/Enemy.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="110" column="34" selection-start-line="110" selection-start-column="34" selection-end-line="110" selection-end-column="34" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -576,16 +534,6 @@
           <caret line="24" column="64" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Screen.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="15" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -707,24 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Playground.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="108" column="49" selection-start-line="108" selection-start-column="49" selection-end-line="108" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#1340#2742#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="67" column="1" selection-start-line="67" selection-start-column="1" selection-end-line="67" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Base/Gradients/OpacityGradients/LowOpacity.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
@@ -763,16 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bubbles/BaseBubble.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="86" lean-forward="true" selection-start-line="9" selection-start-column="86" selection-end-line="9" selection-end-column="86" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Base/Bubbles/GunBubble.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -789,40 +709,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/Mine.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="60" lean-forward="true" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Menu.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="15" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Base/Bubbles/Bubble.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="97" selection-start-line="11" selection-start-column="97" selection-end-line="11" selection-end-column="97" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/Bullet.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="84" column="16" lean-forward="true" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -839,13 +729,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/Bullets.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/favicon.ico">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -853,23 +736,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/const.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="18" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/BulletHunter.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -893,16 +759,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Store.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#16#525#0" />
-            <element signature="e#543#1568#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -921,8 +777,170 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Sounds/Sounds.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+        <state relative-caret-position="221">
+          <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bubbles/BaseBubble.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/block.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="248" column="16" selection-start-line="248" selection-start-column="16" selection-end-line="248" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Screen.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Menu.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Menu.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="53" column="1" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Playground.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/const.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="19" lean-forward="true" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/BulletHunter.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Description.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Playground.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1802">
+          <caret line="106" column="19" selection-start-line="106" selection-start-column="19" selection-end-line="106" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Enemies/Enemy.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/BigBullet.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/Mine.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="60" lean-forward="true" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/Bullet.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="75" column="34" lean-forward="true" selection-start-line="75" selection-start-column="34" selection-end-line="75" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Base/Bullets/Bullets.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/ExpBubble.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-672">
+          <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Store.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="94" column="54" lean-forward="true" selection-start-line="94" selection-start-column="54" selection-end-line="94" selection-end-column="54" />
+          <folding>
+            <element signature="e#16#525#0" />
+            <element signature="e#543#1568#0" />
+            <element signature="e#3178#3338#0" />
+            <element signature="e#3371#3442#0" />
+            <element signature="e#3473#3997#0" />
+            <element signature="e#4033#4343#0" />
+            <element signature="e#4369#4787#0" />
+          </folding>
         </state>
       </provider>
     </entry>

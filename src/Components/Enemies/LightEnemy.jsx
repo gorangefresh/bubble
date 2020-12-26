@@ -5,7 +5,7 @@ import Enemy from "./Enemy";
 import cst from '../../const';
 
 class LightEnemy extends Enemy {
-    baseSpeed = 2;
+    baseSpeed = 6;
     width = 40;
 
 

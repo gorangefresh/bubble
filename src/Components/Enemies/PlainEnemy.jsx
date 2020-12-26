@@ -4,7 +4,7 @@ import Enemy from "./Enemy";
 import cst from '../../const';
 
 class PlainEnemy extends Enemy {
-    baseSpeed = 1.5;
+    baseSpeed = 4.5;
     width = 30;
 
     view = () => {

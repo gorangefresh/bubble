@@ -4,7 +4,7 @@ import Bullet from "./Bullet";
 import cst from "../../../const";
 
 class BigBullet extends Bullet {
-    baseSpeed = 4;
+    baseSpeed = 12;
     D = 20;
 
     view = () => {
