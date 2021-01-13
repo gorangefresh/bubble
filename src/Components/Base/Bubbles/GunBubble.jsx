@@ -1,7 +1,6 @@
 import React from 'react';
 import LowOpacity from '../Gradients/OpacityGradients/LowOpacity';
 import Edge from '../Gradients/OpacityGradients/Edge';
-import cst from "../../../const";
 
 function GunBubble(props) {
     const {w, h, left, top, color} = props;

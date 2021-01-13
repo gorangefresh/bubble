@@ -109,10 +109,10 @@ class Playground extends React.Component {
             if (+x === Store.startX && +y === Store.startY) {
                 description = <Description center={true}/>;
             } else if (
-                +x === Store.startX + 1 && +y === Store.startY ||
-                +x === Store.startX - 1 && +y === Store.startY ||
-                +y === Store.startY + 1 && +x === Store.startX ||
-                +y === Store.startY - 1 && +x === Store.startX
+                (+x === Store.startX + 1 && +y === Store.startY) ||
+                (+x === Store.startX - 1 && +y === Store.startY) ||
+                (+y === Store.startY + 1 && +x === Store.startX) ||
+                (+y === Store.startY - 1 && +x === Store.startX)
             ) {
                 description = <Description center={false}/>;
             }

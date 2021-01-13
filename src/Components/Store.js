@@ -35,7 +35,7 @@ const levels = [
     {
         'level': 7,
         enemies: {
-            'machineGunEnemy': 2,
+            'machineGunEnemy': 4,
             'heavyEnemy': 4,
         },
     },
@@ -43,14 +43,15 @@ const levels = [
         'level': 6,
         enemies: {
             'machineGunEnemy': 1,
-            'lightEnemy': 2,
-            'heavyEnemy': 4,
+            'lightEnemy': 6,
+            'heavyEnemy': 3,
         },
     },
     {
         'level': 5,
         enemies: {
-            'lightEnemy': 4,
+            'machineGunEnemy': 1,
+            'lightEnemy': 5,
             'heavyEnemy': 2,
         },
     },
@@ -58,7 +59,8 @@ const levels = [
         'level': 4,
         enemies: {
             'machineGunEnemy': 1,
-            'plainEnemy': 3
+            'lightEnemy': 5,
+            'heavyEnemy': 1,
         },
     },
     {
@@ -324,40 +326,34 @@ class Store {
     };
 
     addExp = async (exp) => {
+
         this.mainTank.exp += exp;
+
         if (this.mainTank.exp < 0) this.mainTank.exp = 0;
-        for (let i in lvl) {
+        if (this.mainTank.exp > lvl[5]) this.mainTank.exp = lvl[5];
 
-            if (this.mainTank.exp < lvl[i]) {
-                if (this.mainTank.lvl !== +i - 1) {
-                    this.mainTank.lvl = +i - 1;
+        if (
+            this.mainTank.exp >= lvl[this.mainTank.lvl + 1] &&
+            this.mainTank.lvl < 4
+        ) {
+            console.log(this.mainTank.lvl);
+            this.mainTank.lvl += 1;
 
-                    if (!this.upgradeTree[this.mainTank.lvl]) {
-                        this.pause = true;
-                        this.select(true);
+            if (!this.upgradeTree[this.mainTank.lvl]) {
+                this.pause = true;
+                this.select(true);
 
-                        this.setExp(100);
+                this.setExp(100);
 
-                        await this.selectMenu();
-                    }
-
-                    this.upgrade(this.mainTank.lvl);
-                }
-
-                if (i > 0) {
-
-                    if (lvl[+i + 1]) {
-                        exp = (this.mainTank.exp - lvl[this.mainTank.lvl]) / lvl[i] * 100;
-                    } else {
-                        exp = 100;
-                    }
-                } else {
-                    exp = this.mainTank.exp / lvl[i] * 100;
-                }
-                this.setExp(exp);
-                break
+                await this.selectMenu();
             }
+
+            this.upgrade(this.mainTank.lvl);
         }
+
+        exp = 100 * (this.mainTank.exp - lvl[this.mainTank.lvl]) / (lvl[this.mainTank.lvl + 1] - lvl[this.mainTank.lvl]);
+
+        this.setExp(exp);
     };
 
     delay = ms => {
