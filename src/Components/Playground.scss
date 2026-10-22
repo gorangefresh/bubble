@@ -19,7 +19,7 @@
     letter-spacing: 1px;
     word-spacing: 2px;
 
-    color: lighten(#1f615f, 15%);
+    color: var(--c-color3Light15);
     user-select: none;
     display: flex;
     flex-direction: column;
@@ -33,8 +33,8 @@
         display: inline-block;
         text-align: center;
         line-height: 25px;
-        -webkit-text-stroke: 2px lighten(#1f615f, 10%);
-        color: rgba(31, 97, 95, 0);
+        -webkit-text-stroke: 2px var(--c-color3Light10);
+        color: transparent;
         vertical-align: bottom;
     }
 }

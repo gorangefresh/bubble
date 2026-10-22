@@ -1,20 +1,18 @@
-import React from 'react';
-import LowOpacity from '../Gradients/OpacityGradients/LowOpacity';
-import MediumOpacity from '../Gradients/OpacityGradients/MediumOpacity';
-import Edge from '../Gradients/OpacityGradients/Edge';
+import {MASK} from '../Gradients/GradientDefs';
+import BubbleCircle from './BubbleCircle';
 
-function MapBubble(props) {
-    const {color, w, empty} = props;
-
-    let bubbleWidth = w *.8;
-    let viewBox = `0 0 ${bubbleWidth} ${bubbleWidth}`;
-    let gradient = empty ? <MediumOpacity color={color} w={bubbleWidth}/> : <LowOpacity color={color}/>;
+/** Пузырь миникарты. Зачищенные уровни рисуются плотнее. */
+function MapBubble({color, w, empty}) {
+    const bubbleWidth = w * 0.8;
 
     return (
         <div className={'map-bubble'} style={{width: `${w}px`, height: `${w}px`}}>
-            <svg viewBox={viewBox} style={{width: `${bubbleWidth}px`, height: `${bubbleWidth}px`, fill: color}}>
-                {gradient}
-                <Edge color={color} w={w}/>
+            <svg
+                viewBox={`0 0 ${bubbleWidth} ${bubbleWidth}`}
+                style={{width: `${bubbleWidth}px`, height: `${bubbleWidth}px`, fill: color}}
+            >
+                <BubbleCircle mask={empty ? MASK.medium : MASK.low}/>
+                <BubbleCircle mask={MASK.edge}/>
             </svg>
         </div>
     );

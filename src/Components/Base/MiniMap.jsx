@@ -1,29 +1,29 @@
-import React from 'react';
+import colors from '../../config/colors';
+import {MATRIX_SIDE} from '../../config/levels';
+import session from '../../game/session';
 import MapBubble from './Bubbles/MapBubble';
 
 import './MiniMap.scss';
-const baseColor = '#d4f4f0';
-const currentColor = '#0c3e3e';
-const width = 300;
-const padding = 5;
 
-function MiniMap(props) {
-    const {matrix, current, length} = props;
+const WIDTH = 300;
+const PADDING = 5;
 
-    let bubbleWidth = (width - padding * 2) / length;
-
-    let map = [];
-    for (let i in matrix) {
-        let color = i === current ? currentColor : baseColor;
-        let empty = matrix[i].empty && i !== current;
-        map.push(<MapBubble key={i} color={color} w={bubbleWidth} empty={empty}/>)
-    }
-
-    let styles = {width: `${width}px`, height: `${width}px`, padding: `${padding}px`};
+/** Миникарта: текущая ячейка выделена, зачищенные нарисованы плотнее. */
+function MiniMap({current}) {
+    const bubbleWidth = (WIDTH - PADDING * 2) / MATRIX_SIDE;
+    const styles = {width: `${WIDTH}px`, height: `${WIDTH}px`, padding: `${PADDING}px`};
 
     return (
         <div className={'mini-map'} style={styles}>
-            {map}
+            {Object.keys(session.matrix).map(key => (
+                <MapBubble
+                    key={key}
+                    // Было: оба цвета захардкожены прямо в этом файле.
+                    color={key === current ? colors.mapCurrent : colors.mapBase}
+                    w={bubbleWidth}
+                    empty={session.matrix[key].empty && key !== current}
+                />
+            ))}
         </div>
     );
 }

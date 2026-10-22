@@ -1,5 +1,3 @@
-@import "./static/fonts/bubble-bobble-font/BubbleFont.css";
-
 body {
   margin: 0;
   width: 100%;
@@ -9,11 +7,15 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    background: linear-gradient(0deg, rgba(136,196,190,.8) 0%, rgba(136,196,190,1) 40%, rgba(212,244,240,1) 100%);
+    background: linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--c-color2) 80%, transparent) 0%,
+      var(--c-color2) 40%,
+      var(--c-color1) 100%
+    );
     display: flex;
     justify-content: center;
     align-items: center;
-
   }
 }
 
@@ -26,6 +28,13 @@ body {
   overflow: hidden;
   display: flex;
   justify-content: center;
+}
+
+// Общие градиенты и маски: нулевой размер, в лейауте не участвует.
+.gradient-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
 }
 
 .bubble-wrap {
@@ -46,21 +55,45 @@ body {
   box-sizing: content-box;
 }
 
+// Слой поля: сущности внутри него позиционируются от центра.
+.field {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  top: 50%;
+}
+
+/**
+ * Обёртки сущностей.
+ *
+ * Позицию задаёт transform: translate3d, который пишет движок одной
+ * пачкой за кадр. Отсюда left/top: 0 — точкой отсчёта служит начало
+ * координат слоя.
+ *
+ * У .tank-wrap раньше стоял `transition: left .05s linear, top .05s linear`,
+ * и он дрался с JS, который писал те же left/top каждые 50 мс: танк
+ * заметно дрожал. Переход остался только на время перелёта между
+ * уровнями — его ставит и снимает сам компонент.
+ */
 .tank-wrap {
   box-sizing: content-box;
   position: absolute;
-  transition: left .05s linear, top .05s linear;
+  left: 0;
+  top: 0;
   z-index: 10;
 }
 
 .enemy-wrap {
   box-sizing: content-box;
   position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .anim-run {
-    transition: all 0.5s ease;
-    animation: run .5s linear infinite;
+  transition: all 0.5s ease;
+  animation: run .5s linear infinite;
 
   @keyframes run {
     0% {

@@ -1,15 +1,25 @@
-import React from 'react';
-import LowOpacity from '../Gradients/OpacityGradients/LowOpacity';
+import {MASK} from '../Gradients/GradientDefs';
+import BubbleCircle, {classNames} from './BubbleCircle';
 
-function BulletBubble(props) {
-    const {w, h, color} = props;
-    let left = props.left ? props.left : 0;
-    let top = props.top ? props.top : 0;
+/**
+ * Пузырь снаряда.
+ *
+ * Было: className подставлялся без проверки, и у всех снарядов, которым его
+ * не передавали, в разметке оказывался class="bubble-wrap undefined".
+ */
+function BulletBubble({w, h, color, left = 0, top = 0, className}) {
+    const height = h || w;
 
     return (
-        <div className={`bubble-wrap ${props.className}`} style={{left: `${left}px`, top: `${top}px`}}>
-            <svg style={{width: `${w}px`, height: `${h ? h : w}px`, fill: color}}>
-                <LowOpacity color={color} w={w}/>
+        <div
+            className={classNames('bubble-wrap', className)}
+            style={{left: `${left}px`, top: `${top}px`}}
+        >
+            <svg
+                viewBox={`0 0 ${w} ${height}`}
+                style={{width: `${w}px`, height: `${height}px`, fill: color}}
+            >
+                <BubbleCircle mask={MASK.low}/>
             </svg>
         </div>
     );

@@ -9,8 +9,8 @@
   width: 40%;
   height: 20%;
   border-radius: 20px;
-  background: #88c4be;
-  box-shadow: 0 0 3px #1f615f;
+  background: var(--c-color2);
+  box-shadow: 0 0 3px var(--c-color3);
   z-index: 1000;
 
   .selection-menu-section {
@@ -22,7 +22,7 @@
     .description {
       margin-top: 10px;
       text-align: center;
-      color: #1f615f;
+      color: var(--c-color3);
       font: 20px Bubble;
     }
 
@@ -31,14 +31,14 @@
       justify-content: center;
       align-items: center;
       font: 30px Bubble;
-      color: #0c3e3e;
+      color: var(--c-color4);
       cursor: pointer;
 
       &:hover {
-        color: lighten(#0c3e3e, 2%);
+        color: var(--c-color4Light2);
       }
       &:active {
-        text-shadow: 0px 0px 0px #072928;
+        text-shadow: 0px 0px 0px var(--c-color5);
       }
     }
   }

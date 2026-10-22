@@ -1,1 +1,9 @@
-/node_modules/
+node_modules/
+
+# Артефакт сборки: пересобирается `npm run predeploy` перед деплоем
+build/
+
+# IDE и мусор
+.idea/
+*.log
+.DS_Store

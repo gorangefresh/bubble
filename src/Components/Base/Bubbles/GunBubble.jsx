@@ -1,16 +1,18 @@
-import React from 'react';
-import LowOpacity from '../Gradients/OpacityGradients/LowOpacity';
-import Edge from '../Gradients/OpacityGradients/Edge';
+import {MASK} from '../Gradients/GradientDefs';
+import BubbleCircle from './BubbleCircle';
 
-function GunBubble(props) {
-    const {w, h, left, top, color} = props;
-    let viewBox = `0 0 ${w} ${h ? h : w}`;
+/** Пузырь орудия. */
+function GunBubble({w, h, left = 0, top = 0, color}) {
+    const height = h || w;
 
     return (
         <div className={'bubble-wrap'} style={{left: `${left}px`, top: `${top}px`}}>
-            <svg viewBox={viewBox} style={{width: `${w}px`, height: `${h ? h : w}px`, fill: color}}>
-                <Edge color={color}/>
-                <LowOpacity color={color} w={w}/>
+            <svg
+                viewBox={`0 0 ${w} ${height}`}
+                style={{width: `${w}px`, height: `${height}px`, fill: color}}
+            >
+                <BubbleCircle mask={MASK.edge}/>
+                <BubbleCircle mask={MASK.low}/>
             </svg>
         </div>
     );

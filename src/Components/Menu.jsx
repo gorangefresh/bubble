@@ -1,24 +1,18 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import StartButton from './StartButton';
+import Screen from './Screen';
+
 import './Menu.scss';
-import Screen from "./Screen";
 
 function Menu() {
-    const [status, setStatus] = useState('menu');
+    const [started, setStarted] = useState(false);
 
-    const changeStatus = () => {
-        setTimeout(() => setStatus('play'), 100)
-    };
+    // Было: состояние-строка 'menu' | 'play', и если бы значение оказалось
+    // любым другим, компонент вернул бы undefined — в React 18 это ошибка
+    // рендера, а не пустой экран.
+    if (!started) return <StartButton onClick={() => setStarted(true)}/>;
 
-    if (status === 'menu') {
-        return (
-            <StartButton onclick={changeStatus}/>
-        );
-    } else if (status === 'play') {
-        return (
-            <Screen/>
-        );
-    }
+    return <Screen/>;
 }
 
 export default Menu;

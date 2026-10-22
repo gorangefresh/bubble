@@ -1,40 +1,56 @@
-import React, {useState, useEffect} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import GradientDefs from './Base/Gradients/GradientDefs';
+import ExperienceBar from './Base/ExperienceBar';
+import MiniMap from './Base/MiniMap';
+import SelectionMenu from './Base/SelectionMenu';
 import Tank from './Base/Tanks/Tank';
-import Store from './Store';
-import Playground from "./Playground";
-import SelectionMenu from "./Base/SelectionMenu";
-import ExperienceBar from "./Base/ExperienceBar";
-import MiniMap from "./Base/MiniMap";
+import Playground from './Playground';
+import session from '../game/session';
+import {bind, UI} from '../game/ui';
 
 function Screen() {
-    const [position, setPosition] = useState('');
-    const [select, setSelect] = useState(false);
+    const [cellKey, setCellKey] = useState(session.key);
+    const [selecting, setSelecting] = useState(false);
+    const screen = useRef(null);
 
-    const content = [];
-
-    for (let i in Store.matrix) {
-        let x = i.split('-');
-        let y = x[1];
-        x = x[0];
-
-        content.push(<Playground key={i} x={x} y={y} obj={Store.matrix[i]}/>)
-    }
+    // Было: сеттеры присваивались в поля Store без отписки.
+    useEffect(() => bind(UI.SCREEN, setCellKey), []);
+    useEffect(() => bind(UI.SELECT, setSelecting), []);
 
     useEffect(() => {
-        Store.select = setSelect;
+        const measure = () => {
+            const node = screen.current;
+            if (!node) return;
 
-        Store.screenUpdate = setPosition;
+            const rect = node.getBoundingClientRect();
+            session.setFieldCenter(rect.x + rect.width / 2, rect.y + rect.height / 2);
+        };
+
+        measure();
+        window.addEventListener('resize', measure);
+        return () => window.removeEventListener('resize', measure);
     }, []);
 
-    let selectionMenu = select ? <SelectionMenu/> : null;
-
     return (
-        <div id={'screen'} className={'screen'} onClick={onclick}>
-            {selectionMenu}
+        <div id={'screen'} className={'screen'} ref={screen}>
+            <GradientDefs/>
+
+            {selecting ? <SelectionMenu/> : null}
+
             <Tank/>
-            {content}
+
+            {session.visibleCells().map(cell => (
+                <Playground
+                    key={cell.key}
+                    cellKey={cell.key}
+                    position={cell.position}
+                    left={cell.left}
+                    top={cell.top}
+                />
+            ))}
+
             <ExperienceBar/>
-            <MiniMap matrix={Store.matrix} current={`${Store.x}-${Store.y}`} length={Store.matrixLength + 1}/>
+            <MiniMap current={cellKey}/>
         </div>
     );
 }

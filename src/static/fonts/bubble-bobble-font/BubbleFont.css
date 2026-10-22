@@ -1,7 +1,10 @@
 @font-face {
     font-family: 'Bubble';
-    src: url('./BubbleBobble-rg3rx.ttf');
-    src: url('./BubbleBobble-MVpLp.otf');
+    /* Один src со списком через запятую: два отдельных объявления src
+       перебивали друг друга, и .ttf не использовался вообще. */
+    src: url('./BubbleBobble-MVpLp.otf') format('opentype'),
+         url('./BubbleBobble-rg3rx.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: block;
 }

@@ -5,8 +5,8 @@
     width: 600px;
     border-radius: 10px;
     height: 40px;
-    box-shadow: 0 0 6px #0c3e3e;
-    background: #88c4be;
+    box-shadow: 0 0 6px var(--c-color4);
+    background: var(--c-color2);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,14 +16,14 @@
         border-radius: 5px;
         width: 95%;
         height: 20px;
-        box-shadow: 0 0 3px #1f615f;
-        border: 1px solid #1f615f;
-        background: #d4f4f0;
+        box-shadow: 0 0 3px var(--c-color3);
+        border: 1px solid var(--c-color3);
+        background: var(--c-color1);
 
         .inner-stripe {
             height: 100%;
-            box-shadow: 0 0 3px #1f615f;
-            background-color: #1f615f;
+            box-shadow: 0 0 3px var(--c-color3);
+            background-color: var(--c-color3);
             transition: width .3s ease;
         }
     }

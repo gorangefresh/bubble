@@ -6,8 +6,8 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    box-shadow: 0 0 6px #0c3e3e;
-    background: #88c4be;
+    box-shadow: 0 0 6px var(--c-color4);
+    background: var(--c-color2);
     border-radius: 10px;
 
     .map-bubble {

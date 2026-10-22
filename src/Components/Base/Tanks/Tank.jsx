@@ -1,188 +1,105 @@
 import React from 'react';
-import Store from "../../Store";
-import HighOpacity from "../Gradients/OpacityGradients/HighOpacity";
-import cst from "../../../const";
-import Light1 from "./Light1";
-import Light2 from "./Light2";
-import Light3 from "./Light3";
-import Balanced1 from "./Balanced1";
-import Balanced2 from "./Balanced2";
-import Balanced3 from "./Balanced3";
-import Heavy1 from "./Heavy1";
-import Heavy2 from "./Heavy2";
-import Heavy3 from "./Heavy3";
-import Destroyer from "./Destroyer";
-import BaseTank from "./BaseTank";
+import colors from '../../../config/colors';
+import {TRAVEL_MS} from '../../../config/world';
+import World from '../../../engine/World';
+import {clearBullets} from '../../../game/entities/bullet';
+import {createTank, removeTank} from '../../../game/entities/tank';
+import session from '../../../game/session';
+import {bind, UI} from '../../../game/ui';
+import BubbleCircle from '../Bubbles/BubbleCircle';
+import {MASK} from '../Gradients/GradientDefs';
+import tankArt from './tankArt';
 
-
-const Tanks = {
-    0: {light: BaseTank},
-    1: {light: Light1, heavy: Heavy1, balanced: Balanced1},
-    2: {light: Light2, heavy: Heavy2, balanced: Balanced2},
-    3: {light: Light3, heavy: Heavy3, balanced: Balanced3},
-    4: {light: Destroyer, heavy: Destroyer, balanced: Destroyer},
-};
-
+/**
+ * Танк игрока.
+ *
+ * Было: компонент сам держал слушатели клавиатуры и мыши, сам крутил
+ * `setTimeout(this.move, 50)`, сам считал четыре метода goUp/goDown/
+ * goLeft/goRight и писал style.left/top. Теперь движение — в сущности,
+ * ввод — в общем модуле, а компонент остался видом плюс перелёт между
+ * уровнями, который делается CSS-переходом.
+ */
 class Tank extends React.Component {
-    pressed = {};
+    node = React.createRef();
+    travelBubble = React.createRef();
 
-    constructor(props) {
-        super(props);
-
-        this.tank = React.createRef();
-        this.travelBubble = React.createRef();
-
-        this.state = { lvl: 0 };
-        Store.upgrade = (lvl) => this.setState({lvl});
-
-        if (!Store.mainTank.x) this.setPosition();
-    }
-
-    setPosition = () => {
-        Store.mainTank.x = document.body.offsetWidth / 2;
-        Store.mainTank.y = document.body.offsetHeight / 2;
-    };
-
-    addKey = e => this.pressed[e.code] = true;
-
-    removeKey = e => delete this.pressed[e.code];
+    state = {level: 0, ready: false};
 
     componentDidMount() {
-        document.addEventListener('keyup', this.removeKey);
-        document.addEventListener('keydown', this.addKey);
-        document.addEventListener('mousemove', this.mouseMove);
-        this.move();
+        this.entity = createTank({onTravel: this.travel});
+        this.entity.node = this.node.current;
+        World.place(this.entity);
+
+        this.unbind = bind(UI.UPGRADE, level => this.setState({level}));
+
+        // Орудиям нужен носитель, поэтому вид рисуется вторым проходом.
+        this.setState({ready: true});
     }
 
     componentWillUnmount() {
-        document.removeEventListener('keyup', this.removeKey);
-        document.removeEventListener('keydown', this.addKey);
-        document.removeEventListener('mousemove', this.mouseMove);
-        this.pressed = {};
+        this.unbind();
+        removeTank();
+        clearTimeout(this.travelTimer);
     }
 
+    /**
+     * Перелёт в соседний уровень.
+     *
+     * На время перелёта сущность замораживается: позицию ведёт CSS-переход,
+     * и игровой цикл не должен перезаписывать transform.
+     */
     travel = () => {
-        const continueMoving = () => {
-            this.tank.current.style.transition = '';
-            this.move();
-        };
+        const node = this.node.current;
+        if (!node) return;
 
-        if (this.tank.current && this.travelBubble.current) {
-            Store.travel = true;
-            this.travelBubble.current.style.display = 'flex';
-            let delta = Store.changeLevel();
-            this.tank.current.style.transition = 'left .7s linear, top .7s linear';
-            Store.mainTank.x += delta.x;
-            Store.mainTank.y += delta.y;
+        session.travel = true;
+        this.travelBubble.current.style.display = 'flex';
 
-            this.tank.current.style.left = `${Store.mainTank.x}px`;
-            this.tank.current.style.top = `${Store.mainTank.y}px`;
-            setTimeout(continueMoving, 600)
-        }
+        clearBullets();
+
+        const delta = session.changeLevel();
+        const {entity} = this;
+
+        entity.x += delta.x;
+        entity.y += delta.y;
+        entity.px = entity.x;
+        entity.py = entity.y;
+        entity.frozen = true;
+
+        node.style.transition = `transform ${TRAVEL_MS}ms linear`;
+        World.place(entity);
+
+        this.travelTimer = setTimeout(this.arrive, TRAVEL_MS);
     };
 
-    move = () => {
-        if (!Store.pause) {
-            this.goUp();
-            this.goDown();
-            this.goLeft();
-            this.goRight();
-            if (this.tank.current) {
-                this.tank.current.style.left = `${Store.mainTank.x}px`;
-                this.tank.current.style.top = `${Store.mainTank.y}px`;
-                this.turn();
-            }
+    arrive = () => {
+        const node = this.node.current;
+        if (!node) return;
 
-            if (Store.touchEdge(Store.mainTank.x - Store.currentBasePosition.x, Store.mainTank.y - Store.currentBasePosition.y)) {
-                if (!Store.travel) {
-                    return this.travel();
-                }
-            } else {
-                if (Store.travel) {
-                    Store.travel = false;
-                    this.travelBubble.current.style.display = 'none';
-                }
-            }
-        }
-        if (this.tank.current) setTimeout(this.move, 50);
-    };
-
-    goUp = () => {
-        if (this.pressed['KeyW'] && !this.pressed['KeyS']) {
-            if (this.pressed['KeyA'] || this.pressed['KeyD']) {
-                Store.mainTank.y = Store.mainTank.y - Store.mainTank.halfSpeed;
-            } else {
-                Store.mainTank.y = Store.mainTank.y - Store.mainTank.speed;
-            }
-        }
-    };
-    goDown = () => {
-        if (this.pressed['KeyS'] && !this.pressed['KeyW']) {
-            if (this.pressed['KeyA'] || this.pressed['KeyD']) {
-                Store.mainTank.y = Store.mainTank.y + Store.mainTank.halfSpeed;
-            } else {
-                Store.mainTank.y = Store.mainTank.y + Store.mainTank.speed;
-            }
-        }
-
-    };
-    goLeft = () => {
-        if (this.pressed['KeyA'] && !this.pressed['KeyD']) {
-            if (this.pressed['KeyS'] || this.pressed['KeyW']) {
-                Store.mainTank.x = Store.mainTank.x - Store.mainTank.halfSpeed;
-            } else {
-                Store.mainTank.x = Store.mainTank.x - Store.mainTank.speed;
-            }
-        }
-
-    };
-    goRight = () => {
-        if (this.pressed['KeyD'] && !this.pressed['KeyA']) {
-            if (this.pressed['KeyS'] || this.pressed['KeyW']) {
-                Store.mainTank.x = Store.mainTank.x + Store.mainTank.halfSpeed;
-            } else {
-                Store.mainTank.x = Store.mainTank.x + Store.mainTank.speed;
-            }
-        }
-    };
-
-    mouseMove = e => {
-        if (!Store.pause) {
-            Store.setMouse(e);
-            this.turn();
-        }
-    };
-
-    turn = () => {
-        const getAngle = (center, point) => {
-            return 180 * Math.atan2(point.y - center.y, point.x - center.x) / Math.PI;
-        };
-
-        Store.mainTank.angle = getAngle(Store.mainTank, Store.mouse);
-        if (this.tank.current) this.tank.current.style.transform = `rotate(${Store.mainTank.angle + 90}deg)`;
+        node.style.transition = '';
+        this.entity.frozen = false;
+        session.travel = false;
+        this.travelBubble.current.style.display = 'none';
     };
 
     render() {
-        let view = React.createElement(
-            Tanks[this.state.lvl][Store.upgradeTree[this.state.lvl]],
-            {
-                tank: this.tank,
-            }
-        );
+        const size = session.hero.stats.width * 2;
 
         return (
-            <div className={'tank-wrap'} ref={this.tank}>
+            <div className={'tank-wrap'} ref={this.node}>
                 <div className={'bubble-wrap'} style={{display: 'none'}} ref={this.travelBubble}>
-                    <svg id={'travel'} viewBox={`0 0 ${Store.tankD * 2} ${Store.tankD * 2}`}
-                         style={{width: `${Store.tankD * 2}px`, height: `${Store.tankD * 2}px`}}>
-                        <HighOpacity color={cst.travelColor} w={Store.tankD * 2}/>
+                    <svg
+                        viewBox={`0 0 ${size} ${size}`}
+                        style={{width: `${size}px`, height: `${size}px`, fill: colors.travelColor}}
+                    >
+                        <BubbleCircle mask={MASK.high}/>
                     </svg>
                 </div>
-                {view}
+
+                {this.state.ready ? tankArt[session.heroTankId](this.entity) : null}
             </div>
         );
     }
-
 }
 
 export default Tank;

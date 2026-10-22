@@ -1,17 +1,21 @@
-import React from 'react';
-import LowOpacity from '../Gradients/OpacityGradients/LowOpacity';
-import Edge from '../Gradients/OpacityGradients/Edge';
+import {MASK} from '../Gradients/GradientDefs';
+import BubbleCircle, {classNames} from './BubbleCircle';
 
-function Bubble(props) {
-    const {color, w, h, left, top} = props;
-
-    let viewBox = `0 0 ${w} ${h ? h : w}`;
+/** Пузырь корпуса: мягкая заливка плюс подсветка по кромке. */
+function Bubble({color, w, h, left = 0, top = 0, className}) {
+    const height = h || w;
 
     return (
-        <div className={`bubble-wrap ${props.class ? props.class : ''}`} style={{left: `${left}px`, top: `${top}px`}}>
-            <svg viewBox={viewBox} style={{width: `${w}px`, height: `${h ? h : w}px`, fill: color}}>
-                <LowOpacity color={color} w={w}/>
-                <Edge color={color} w={w}/>
+        <div
+            className={classNames('bubble-wrap', className)}
+            style={{left: `${left}px`, top: `${top}px`}}
+        >
+            <svg
+                viewBox={`0 0 ${w} ${height}`}
+                style={{width: `${w}px`, height: `${height}px`, fill: color}}
+            >
+                <BubbleCircle mask={MASK.low}/>
+                <BubbleCircle mask={MASK.edge}/>
             </svg>
         </div>
     );
